@@ -10,6 +10,7 @@
             --accent-color: #27ae60;
             --bg-color: #f4f7f6;
             --card-bg: #ffffff;
+            --sidebar-width: 300px;
         }
         body {
             font-family: "Helvetica Neue", Arial, sans-serif;
@@ -19,11 +20,13 @@
             color: #333;
             line-height: 1.6;
         }
+
+        /* 頂部封面 */
         header {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1469521669194-babb45f83513?q=80&w=1920&auto=format&fit=crop');
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1507699622177-388880d73a75?q=80&w=1920&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
-            height: 60vh;
+            height: 50vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -31,22 +34,87 @@
             color: white;
             padding: 20px;
         }
-        header h1 { font-size: 3rem; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-        header p { font-size: 1.2rem; margin-top: 10px; font-weight: 300; }
-        .container {
-            max-width: 800px;
-            margin: -50px auto 50px;
-            padding: 20px;
+        header h1 { font-size: 2.5rem; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        header p { font-size: 1.1rem; margin-top: 10px; font-weight: 300; }
+
+        /* 主要排版容器 (Flexbox) */
+        .main-container {
+            display: flex;
+            max-width: 1100px;
+            margin: -40px auto 40px; /* 往上蓋住一點 Header */
+            padding: 0 20px;
+            gap: 25px;
             position: relative;
         }
+
+        /* --- 側邊欄 (住宿區) --- */
+        aside.sidebar {
+            flex: 0 0 var(--sidebar-width); /* 固定寬度 */
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky; /* 讓它黏在螢幕上 */
+            top: 20px;
+        }
+
+        .sidebar h2 {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .hotel-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .hotel-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #eee;
+        }
+        .hotel-item:last-child { border-bottom: none; }
+
+        .hotel-day {
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            font-weight: bold;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .hotel-link {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            display: flex;
+            align-items: flex-start;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        .hotel-link:hover { color: #2980b9; }
+        .hotel-link span { font-size: 1.2rem; } /* Icon size */
+
+        /* --- 主要內容區 (行程卡片) --- */
+        main.content {
+            flex: 1; /* 佔據剩餘空間 */
+            min-width: 0; /* 防止內容撐開 */
+        }
+
         .day-card {
             background: var(--card-bg);
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             overflow: hidden;
             border-left: 5px solid var(--accent-color);
         }
+
         .day-header {
             background-color: #ecf0f1;
             padding: 15px 20px;
@@ -55,44 +123,40 @@
             align-items: center;
             border-bottom: 1px solid #eee;
         }
-        .day-title { font-weight: bold; font-size: 1.2rem; color: var(--primary-color); }
+        .day-title { font-weight: bold; font-size: 1.1rem; color: var(--primary-color); }
         .day-date { color: #7f8c8d; font-size: 0.9rem; }
+        
         .day-content { padding: 20px; }
-        .time-slot {
-            display: flex;
-            margin-bottom: 15px;
-            align-items: flex-start;
-        }
-        .time {
-            min-width: 60px;
-            font-weight: bold;
-            color: var(--accent-color);
-            font-size: 0.9rem;
-            margin-top: 2px;
-        }
+        .time-slot { display: flex; margin-bottom: 15px; align-items: flex-start; }
+        .time { min-width: 50px; font-weight: bold; color: var(--accent-color); font-size: 0.9rem; margin-top: 2px; }
         .activity { flex: 1; }
         .activity strong { display: block; margin-bottom: 4px; color: #2c3e50; }
+        
         .tag {
             display: inline-block;
             background: #e8f5e9;
             color: #27ae60;
             padding: 2px 8px;
             border-radius: 4px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             margin-right: 5px;
         }
         .tag.hotel { background: #fff3e0; color: #e67e22; }
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: #7f8c8d;
-            font-size: 0.9rem;
-        }
-        @media (max-width: 600px) {
-            header h1 { font-size: 2rem; }
-            .container { margin-top: 0; }
-            .day-header { flex-direction: column; align-items: flex-start; }
-            .day-date { margin-top: 5px; }
+
+        /* RWD 響應式設計 (手機版調整) */
+        @media (max-width: 850px) {
+            .main-container {
+                flex-direction: column; /* 改為垂直排列 */
+                margin-top: 0;
+            }
+            aside.sidebar {
+                width: auto;
+                position: relative; /* 手機版取消置頂，或是改 top: 0 */
+                top: 0;
+                margin-bottom: 20px;
+                order: -1; /* 讓住宿區顯示在行程之前 (可選) */
+            }
+            header { height: 40vh; }
         }
     </style>
 </head>
@@ -105,263 +169,232 @@
     </div>
 </header>
 
-<div class="container">
+<div class="main-container">
+    
+    <aside class="sidebar">
+        <h2>🏨 住宿快速導航</h2>
+        <ul class="hotel-list">
+            <li class="hotel-item">
+                <span class="hotel-day">Day 1 (02/15)</span>
+                <a href="https://www.google.com/maps/search/?api=1&query=基督城機場諾富特酒店+Novotel+Christchurch+Airport" target="_blank" class="hotel-link">
+                    <span>📍</span> 基督城機場諾富特酒店
+                </a>
+            </li>
+            <li class="hotel-item">
+                <span class="hotel-day">Day 2 (02/16)</span>
+                <a href="https://www.google.com/maps/search/?api=1&query=Haka+House+Lake+Tekapo" target="_blank" class="hotel-link">
+                    <span>📍</span> Haka House Lake Tekapo
+                </a>
+            </li>
+            <li class="hotel-item">
+                <span class="hotel-day">Day 3 (02/17)</span>
+                <a href="https://www.google.com/maps/search/?api=1&query=Queenstown+Park+Boutique+Hotel" target="_blank" class="hotel-link">
+                    <span>📍</span> Queenstown Park Boutique Hotel
+                </a>
+            </li>
+            <li class="hotel-item">
+                <span class="hotel-day">Day 4 (02/18)</span>
+                <a href="https://www.google.com/maps/search/?api=1&query=Queenstown+Park+Boutique+Hotel" target="_blank" class="hotel-link">
+                    <span>📍</span> Queenstown Park Boutique Hotel (續住)
+                </a>
+            </li>
+            <li class="hotel-item">
+                <span class="hotel-day">Day 5 (02/19)</span>
+                <a href="https://www.google.com/maps/search/?api=1&query=Radfords+on+the+Lake+Te+Anau" target="_blank" class="hotel-link">
+                    <span>📍</span> Radfords on the Lake
+                </a>
+            </li>
+            <li class="hotel-item">
+                <span class="hotel-day">Day 6 (02/20)</span>
+                <a href="https://www.google.com/maps/search/?api=1&query=Casa+Nova+House+Oamaru" target="_blank" class="hotel-link">
+                    <span>📍</span> Casa Nova House
+                </a>
+            </li>
+            <li class="hotel-item">
+                <span class="hotel-day">Day 7 (02/21)</span>
+                <a href="https://www.google.com/maps/search/?api=1&query=基督城假日皇冠酒店+Crowne+Plaza+Christchurch" target="_blank" class="hotel-link">
+                    <span>📍</span> 基督城假日皇冠酒店
+                </a>
+            </li>
+            <li class="hotel-item">
+                <span class="hotel-day">Day 8-9 (02/22-23)</span>
+                <a href="https://www.google.com/maps/search/?api=1&query=Horizon+by+SkyCity+Auckland" target="_blank" class="hotel-link">
+                    <span>📍</span> Horizon by SkyCity
+                </a>
+            </li>
+        </ul>
+    </aside>
 
-    <div class="day-card">
-        <div class="day-header">
-            <span class="day-title">Day 1：抵達基督城</span>
-            <span class="day-date">2026-02-15 (日)</span>
-        </div>
-        <div class="day-content">
-            <div class="time-slot">
-                <div class="time">全日</div>
-                <div class="activity">
-                    <strong>抵達基督城 行程</strong>
-                    <span class="tag">自由探索</span>
-                    享受紐西蘭的美景！
+    <main class="content">
+        
+        <div class="day-card">
+            <div class="day-header">
+                <span class="day-title">Day 1：抵達基督城</span>
+                <span class="day-date">2026-02-15 (日)</span>
+            </div>
+            <div class="day-content">
+                <div class="time-slot">
+                    <div class="time">活動</div>
+                    <div class="activity">
+                        <strong>抵達基督城</strong>
+                        <span class="tag">自由探索</span>
+                    </div>
+                </div>
+                <div class="time-slot">
+                    <div class="time">住宿</div>
+                    <div class="activity">
+                        <strong>基督城機場諾富特酒店</strong>
+                        <p style="font-size:0.85rem; color:#7f8c8d; margin-top:4px;">30 Durey Road, Christchurch Airport</p>
+                    </div>
                 </div>
             </div>
-            <div class="time-slot">
-                <div class="time">住宿</div>
-                <div class="activity">
-                    <strong>基督城機場諾富特酒店</strong>
-                    <span class="tag hotel">飯店</span>
-                    <p style="font-size:0.85rem; color:#7f8c8d; margin-top:4px;">📍 30 Durey Road, Christchurch Airport, Christchurch 8053紐西蘭</p>
-                </div>
-            </div>
         </div>
-    </div>
 
-    <div class="day-card">
-        <div class="day-header">
-            <span class="day-title">Day 2：公路旅行</span>
-            <span class="day-date">2026-02-16 (一)</span>
-        </div>
-        <div class="day-content">
-            <div class="time-slot">
-                <div class="time">全日</div>
-                <div class="activity">
-                    <strong>公路旅行 行程</strong>
-                    <span class="tag">自由探索</span>
-                    享受紐西蘭的美景！
-                </div>
+        <div class="day-card">
+            <div class="day-header">
+                <span class="day-title">Day 2：Lake Tekapo</span>
+                <span class="day-date">2026-02-16 (一)</span>
             </div>
-            <div class="time-slot">
-                <div class="time">住宿</div>
-                <div class="activity">
-                    <strong>Haka House Lake Tekapo</strong>
-                    <span class="tag hotel">飯店</span>
-                    <p style="font-size:0.85rem; color:#7f8c8d; margin-top:4px;">📍 5 Motuariki Lane, Lake Tekapo 7999紐西蘭</p>
+            <div class="day-content">
+                <div class="time-slot">
+                    <div class="time">住宿</div>
+                    <div class="activity">
+                        <strong>Haka House Lake Tekapo</strong>
+                        <p style="font-size:0.85rem; color:#7f8c8d; margin-top:4px;">5 Motuariki Lane, Lake Tekapo</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="day-card">
-        <div class="day-header">
-            <span class="day-title">Day 3：皇后鎮</span>
-            <span class="day-date">2026-02-17 (二)</span>
-        </div>
-        <div class="day-content">
-            <div class="time-slot">
-                <div class="time">全日</div>
-                <div class="activity">
-                    <strong>皇后鎮 行程</strong>
-                    <span class="tag">自由探索</span>
-                    享受紐西蘭的美景！
-                </div>
+        <div class="day-card">
+            <div class="day-header">
+                <span class="day-title">Day 3：皇后鎮</span>
+                <span class="day-date">2026-02-17 (二)</span>
             </div>
-            <div class="time-slot">
-                <div class="time">住宿</div>
-                <div class="activity">
-                    <strong>Queenstown Park Boutique Hotel</strong>
-                    <span class="tag hotel">飯店</span>
-                    <p style="font-size:0.85rem; color:#7f8c8d; margin-top:4px;">📍 21 Robins Road, Queenstown 9300紐西蘭</p>
+            <div class="day-content">
+                <div class="time-slot">
+                    <div class="time">住宿</div>
+                    <div class="activity">
+                        <strong>Queenstown Park Boutique Hotel</strong>
+                        <p style="font-size:0.85rem; color:#7f8c8d; margin-top:4px;">21 Robins Road, Queenstown</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="day-card">
-        <div class="day-header">
-            <span class="day-title">Day 4：皇后鎮</span>
-            <span class="day-date">2026-02-18 (三)</span>
-        </div>
-        <div class="day-content">
-            <div class="time-slot">
-                <div class="time">全日</div>
-                <div class="activity">
-                    <strong>皇后鎮 行程</strong>
-                    <span class="tag">自由探索</span>
-                    享受紐西蘭的美景！
-                </div>
+        <div class="day-card">
+            <div class="day-header">
+                <span class="day-title">Day 4：皇后鎮</span>
+                <span class="day-date">2026-02-18 (三)</span>
             </div>
-            <div class="time-slot">
-                <div class="time">住宿</div>
-                <div class="activity">
-                    <strong>Queenstown Park Boutique Hotel</strong>
-                    <span class="tag hotel">飯店</span>
-                    <p style="font-size:0.85rem; color:#7f8c8d; margin-top:4px;">📍 21 Robins Road, Queenstown 9300紐西蘭</p>
+            <div class="day-content">
+                <div class="time-slot">
+                    <div class="time">住宿</div>
+                    <div class="activity">
+                        <strong>Queenstown Park Boutique Hotel</strong>
+                        <span class="tag hotel">續住</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="day-card">
-        <div class="day-header">
-            <span class="day-title">Day 5：公路旅行</span>
-            <span class="day-date">2026-02-19 (四)</span>
-        </div>
-        <div class="day-content">
-            <div class="time-slot">
-                <div class="time">全日</div>
-                <div class="activity">
-                    <strong>公路旅行 行程</strong>
-                    <span class="tag">自由探索</span>
-                    享受紐西蘭的美景！
-                </div>
+        <div class="day-card">
+            <div class="day-header">
+                <span class="day-title">Day 5：Te Anau</span>
+                <span class="day-date">2026-02-19 (四)</span>
             </div>
-            <div class="time-slot">
-                <div class="time">住宿</div>
-                <div class="activity">
-                    <strong>Radfords on the Lake</strong>
-                    <span class="tag hotel">飯店</span>
-                    <p style="font-size:0.85rem; color:#7f8c8d; margin-top:4px;">📍 56 Lakefront Drive, Te Anau 9600紐西蘭</p>
+            <div class="day-content">
+                <div class="time-slot">
+                    <div class="time">住宿</div>
+                    <div class="activity">
+                        <strong>Radfords on the Lake</strong>
+                        <p style="font-size:0.85rem; color:#7f8c8d; margin-top:4px;">56 Lakefront Drive, Te Anau</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="day-card">
-        <div class="day-header">
-            <span class="day-title">Day 6：公路旅行</span>
-            <span class="day-date">2026-02-20 (五)</span>
-        </div>
-        <div class="day-content">
-            <div class="time-slot">
-                <div class="time">全日</div>
-                <div class="activity">
-                    <strong>公路旅行 行程</strong>
-                    <span class="tag">自由探索</span>
-                    享受紐西蘭的美景！
-                </div>
+        <div class="day-card">
+            <div class="day-header">
+                <span class="day-title">Day 6：Oamaru</span>
+                <span class="day-date">2026-02-20 (五)</span>
             </div>
-            <div class="time-slot">
-                <div class="time">住宿</div>
-                <div class="activity">
-                    <strong>Casa Nova House</strong>
-                    <span class="tag hotel">飯店</span>
-                    <p style="font-size:0.85rem; color:#7f8c8d; margin-top:4px;">📍 1 Alt Street, Oamaru North, Oamaru 9400紐西蘭</p>
+            <div class="day-content">
+                <div class="time-slot">
+                    <div class="time">住宿</div>
+                    <div class="activity">
+                        <strong>Casa Nova House</strong>
+                        <p style="font-size:0.85rem; color:#7f8c8d; margin-top:4px;">1 Alt Street, Oamaru</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="day-card">
-        <div class="day-header">
-            <span class="day-title">Day 7：基督城</span>
-            <span class="day-date">2026-02-21 (六)</span>
-        </div>
-        <div class="day-content">
-            <div class="time-slot">
-                <div class="time">全日</div>
-                <div class="activity">
-                    <strong>基督城 行程</strong>
-                    <span class="tag">自由探索</span>
-                    享受紐西蘭的美景！
-                </div>
+        <div class="day-card">
+            <div class="day-header">
+                <span class="day-title">Day 7：基督城</span>
+                <span class="day-date">2026-02-21 (六)</span>
             </div>
-            <div class="time-slot">
-                <div class="time">住宿</div>
-                <div class="activity">
-                    <strong>基督城假日皇冠酒店</strong>
-                    <span class="tag hotel">飯店</span>
-                    <p style="font-size:0.85rem; color:#7f8c8d; margin-top:4px;">📍 764 Colombo Street, Christchurch Central City, Christchurch 8011紐西蘭</p>
+            <div class="day-content">
+                <div class="time-slot">
+                    <div class="time">住宿</div>
+                    <div class="activity">
+                        <strong>基督城假日皇冠酒店</strong>
+                        <p style="font-size:0.85rem; color:#7f8c8d; margin-top:4px;">764 Colombo Street, Christchurch</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="day-card">
-        <div class="day-header">
-            <span class="day-title">Day 8：奧克蘭</span>
-            <span class="day-date">2026-02-22 (日)</span>
-        </div>
-        <div class="day-content">
-            <div class="time-slot">
-                <div class="time">全日</div>
-                <div class="activity">
-                    <strong>奧克蘭 行程</strong>
-                    <span class="tag">自由探索</span>
-                    享受紐西蘭的美景！
-                </div>
+        <div class="day-card">
+            <div class="day-header">
+                <span class="day-title">Day 8：奧克蘭</span>
+                <span class="day-date">2026-02-22 (日)</span>
             </div>
-            <div class="time-slot">
-                <div class="time">住宿</div>
-                <div class="activity">
-                    <strong>Horizon by SkyCity</strong>
-                    <span class="tag hotel">飯店</span>
-                    <p style="font-size:0.85rem; color:#7f8c8d; margin-top:4px;">📍 85 Hobson Street, Auckland Central, Auckland 1010紐西蘭</p>
+            <div class="day-content">
+                <div class="time-slot">
+                    <div class="time">住宿</div>
+                    <div class="activity">
+                        <strong>Horizon by SkyCity</strong>
+                        <p style="font-size:0.85rem; color:#7f8c8d; margin-top:4px;">85 Hobson Street, Auckland</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="day-card">
-        <div class="day-header">
-            <span class="day-title">Day 9：奧克蘭</span>
-            <span class="day-date">2026-02-23 (一)</span>
-        </div>
-        <div class="day-content">
-            <div class="time-slot">
-                <div class="time">全日</div>
-                <div class="activity">
-                    <strong>奧克蘭 行程</strong>
-                    <span class="tag">自由探索</span>
-                    享受紐西蘭的美景！
-                </div>
+        <div class="day-card">
+            <div class="day-header">
+                <span class="day-title">Day 9：奧克蘭</span>
+                <span class="day-date">2026-02-23 (一)</span>
             </div>
-            <div class="time-slot">
-                <div class="time">住宿</div>
-                <div class="activity">
-                    <strong>Horizon by SkyCity</strong>
-                    <span class="tag hotel">飯店</span>
-                    <p style="font-size:0.85rem; color:#7f8c8d; margin-top:4px;">📍 85 Hobson Street, Auckland Central, Auckland 1010紐西蘭</p>
+            <div class="day-content">
+                <div class="time-slot">
+                    <div class="time">住宿</div>
+                    <div class="activity">
+                        <strong>Horizon by SkyCity</strong>
+                        <span class="tag hotel">續住</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="day-card">
-        <div class="day-header">
-            <span class="day-title">Day 10：公路旅行</span>
-            <span class="day-date">2026-02-24 (二)</span>
-        </div>
-        <div class="day-content">
-            <div class="time-slot">
-                <div class="time">全日</div>
-                <div class="activity">
-                    <strong>公路旅行 行程</strong>
-                    <span class="tag">自由探索</span>
-                    享受紐西蘭的美景！
-                </div>
+        <div class="day-card">
+            <div class="day-header">
+                <span class="day-title">Day 10：返程/待定</span>
+                <span class="day-date">2026-02-24 (二)</span>
             </div>
-            <div class="time-slot">
-                <div class="time">住宿</div>
-                <div class="activity">
-                    <strong>待定 / 返程</strong>
-                    <span class="tag hotel">飯店</span>
-                    
+            <div class="day-content">
+                <div class="time-slot">
+                    <div class="time">資訊</div>
+                    <div class="activity">
+                        <strong>旅程結束</strong>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
+    </main>
 </div>
-
-<footer>
-    <p>Trip to New Zealand 2026</p>
-</footer>
 
 </body>
 </html>
