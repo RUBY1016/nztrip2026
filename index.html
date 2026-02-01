@@ -11,6 +11,7 @@
             --primary-color: #2c3e50; /* 深藍 */
             --accent-color: #27ae60;  /* 紐西蘭綠 */
             --bg-color: #f8f9fa;
+            --pdf-color: #3498db; /* 新增 PDF 按鈕顏色 (藍色) */
             --sidebar-width: 260px;
         }
         
@@ -128,45 +129,45 @@
             gap: 10px;
         }
 
-        /* [區塊1] 住宿樣式 */
-        .hotel-grid {
-            display: grid;
-            gap: 20px;
-        }
+        /* 住宿卡片樣式更新 */
+        .hotel-grid { display: grid; gap: 20px; }
         .hotel-card {
-            border: 1px solid #eee;
-            border-radius: 10px;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: transform 0.2s;
+            border: 1px solid #eee; border-radius: 10px; padding: 20px;
+            display: flex; flex-direction: column; /* 改為垂直排列以便放入按鈕組 */
+            gap: 15px; transition: transform 0.2s;
         }
         .hotel-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             border-color: var(--accent-color);
         }
+        
+        /* 卡片上半部資訊 */
+        .hotel-header { width: 100%; }
         .hotel-info h3 { margin: 0 0 5px 0; font-size: 1.1rem; color: #333; }
         .hotel-info p { margin: 0; font-size: 0.9rem; color: #666; }
         .hotel-day-badge {
-            background: #e3f2fd; color: #1565c0;
-            padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold;
+            background: #e3f2fd; color: #1565c0; padding: 4px 8px;
+            border-radius: 4px; font-size: 0.8rem; font-weight: bold;
             margin-bottom: 8px; display: inline-block;
         }
-        .map-btn {
-            text-decoration: none;
-            background: var(--accent-color);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+
+        /* 按鈕群組區域 */
+        .card-actions {
+            display: flex; gap: 10px; width: 100%;
+            border-top: 1px dashed #eee; padding-top: 15px;
         }
-        .map-btn:hover { background: #219150; }
+        
+        /* 通用按鈕樣式 */
+        .btn {
+            text-decoration: none; padding: 8px 16px; border-radius: 20px;
+            font-size: 0.85rem; font-weight: bold; flex: 1; /* 讓按鈕平均分配寬度 */
+            display: flex; justify-content: center; align-items: center; gap: 6px;
+            transition: opacity 0.2s;
+        }
+        .btn:hover { opacity: 0.8; }
+        
+        .map-btn { background: var(--accent-color); color: white; }
+        .pdf-btn { background: var(--pdf-color); color: white; }
 
         /* [區塊2] 行程樣式 (精簡版) */
         .day-item {
@@ -259,6 +260,7 @@
                         <h3>基督城機場諾富特酒店</h3>
                     </div>
                     <a href="https://maps.app.goo.gl/dQxjsP8NNvxcKjFh6" target="_blank" class="map-btn">📍 地圖導航</a>
+                    <a href="nz2:15.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
                 </div>
 
                 <div class="hotel-card">
@@ -283,7 +285,7 @@
                         <h3>Queenstown Park Boutique Hotel</h3>
                     </div>
                     <a href="https://maps.app.goo.gl/NtyVPwBb3XpaZmCH8" target="_blank" class="map-btn">📍 地圖導航</a>
-                    <a href="nz2/15.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
+                    
                 </div>
                 
                 <div class="hotel-card">
