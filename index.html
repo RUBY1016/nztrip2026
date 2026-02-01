@@ -8,9 +8,9 @@
     
     <style>
         :root {
-            --primary-color: #2c3e50; /* 深藍 */
-            --accent-color: #27ae60;  /* 紐西蘭綠 */
-            --pdf-color: #3498db;     /* PDF 按鈕藍色 */
+            --primary-color: #2c3e50;
+            --accent-color: #27ae60;
+            --pdf-color: #3498db;
             --bg-color: #f8f9fa;
             --sidebar-width: 260px;
         }
@@ -23,7 +23,6 @@
             color: #333; line-height: 1.6;
         }
 
-        /* 封面 Header */
         header.hero {
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1575351666624-b152e93b4a26?q=80&w=1920&auto=format&fit=crop');
             background-size: cover; background-position: center;
@@ -34,12 +33,10 @@
         header.hero h1 { font-size: 3rem; margin: 0; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
         header.hero p { font-size: 1.2rem; margin-top: 10px; opacity: 0.9; }
 
-        /* 佈局容器 */
         .layout-container {
             display: flex; max-width: 1200px; margin: 0 auto; padding: 20px; gap: 40px;
         }
 
-        /* 側邊欄 Sidebar */
         aside.sidebar {
             flex: 0 0 var(--sidebar-width); height: fit-content;
             position: sticky; top: 40px;
@@ -56,7 +53,6 @@
         .nav-link:hover { background-color: #e8f5e9; color: var(--accent-color); transform: translateX(5px); }
         .nav-link.active { background-color: var(--accent-color); color: white; }
 
-        /* 主要內容 Main */
         main.content { flex: 1; min-width: 0; }
         section {
             background: white; border-radius: 16px; padding: 40px; margin-bottom: 40px;
@@ -68,11 +64,10 @@
             display: flex; align-items: center; gap: 10px;
         }
 
-        /* 住宿卡片樣式 Hotel Card */
         .hotel-grid { display: grid; gap: 20px; }
         .hotel-card {
             border: 1px solid #eee; border-radius: 10px; padding: 20px;
-            display: flex; flex-direction: column; /* 垂直排列：上為資訊，下為按鈕 */
+            display: flex; flex-direction: column;
             gap: 15px; transition: transform 0.2s;
         }
         .hotel-card:hover {
@@ -89,7 +84,6 @@
             margin-bottom: 8px; display: inline-block;
         }
 
-        /* 按鈕區塊 */
         .card-actions {
             display: flex; gap: 10px; width: 100%;
             border-top: 1px dashed #eee; padding-top: 15px;
@@ -105,7 +99,6 @@
         .map-btn { background: var(--accent-color); color: white; }
         .pdf-btn { background: var(--pdf-color); color: white; }
 
-        /* 行程樣式 */
         .day-item {
             border-left: 4px solid #ddd; padding-left: 20px; margin-bottom: 30px; position: relative;
         }
@@ -117,19 +110,17 @@
         .day-title-text { font-size: 1.2rem; font-weight: bold; margin: 5px 0; color: var(--primary-color); }
         .day-desc { color: #555; }
 
-        /* 表格樣式 */
         .info-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
         .info-table th, .info-table td { padding: 15px; border-bottom: 1px solid #eee; text-align: left; }
         .info-table th { background-color: #f8f9fa; color: #555; width: 30%; }
         .status-tag { background: #fff3e0; color: #e67e22; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; }
         .status-tag.ok { background: #e8f5e9; color: #27ae60; }
 
-        /* RWD 手機版 */
         @media (max-width: 800px) {
             .layout-container { flex-direction: column; padding: 10px; }
             aside.sidebar { width: auto; position: relative; top: 0; padding: 15px; }
             .nav-menu { display: flex; gap: 10px; overflow-x: auto; white-space: nowrap; }
-            .card-actions { flex-direction: column; } /* 手機版按鈕垂直排列較好點 */
+            .card-actions { flex-direction: column; }
         }
     </style>
 </head>
@@ -168,7 +159,7 @@
                     </div>
                     <div class="card-actions">
                         <a href="https://maps.app.goo.gl/dQxjsP8NNvxcKjFh6" target="_blank" class="btn map-btn">📍 地圖導航</a>
-                        <a href="day1.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
+                        <a href="nz_0215.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
                     </div>
                 </div>
 
@@ -182,7 +173,7 @@
                     </div>
                     <div class="card-actions">
                         <a href="https://maps.app.goo.gl/sVeNhvjxdTd7ab12A" target="_blank" class="btn map-btn">📍 地圖導航</a>
-                        <a href="day2.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
+                        <a href="nz_0216.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
                     </div>
                 </div>
 
@@ -196,7 +187,7 @@
                     </div>
                     <div class="card-actions">
                         <a href="https://maps.app.goo.gl/NtyVPwBb3XpaZmCH8" target="_blank" class="btn map-btn">📍 地圖導航</a>
-                        <a href="day3.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
+                        <a href="nz_0217.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
                     </div>
                 </div>
 
@@ -210,7 +201,7 @@
                     </div>
                     <div class="card-actions">
                         <a href="https://maps.app.goo.gl/dXTNbMoETZ9FPJ238" target="_blank" class="btn map-btn">📍 地圖導航</a>
-                        <a href="day5.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
+                        <a href="nz_0219.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
                     </div>
                 </div>
 
@@ -224,7 +215,7 @@
                     </div>
                     <div class="card-actions">
                         <a href="https://maps.app.goo.gl/5W8tKdi4yNFSGpVn7" target="_blank" class="btn map-btn">📍 地圖導航</a>
-                        <a href="day6.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
+                        <a href="nz_0220.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
                     </div>
                 </div>
                 
@@ -238,7 +229,7 @@
                     </div>
                     <div class="card-actions">
                         <a href="https://maps.app.goo.gl/p56o5YQd7o5q6Tvv5" target="_blank" class="btn map-btn">📍 地圖導航</a>
-                        <a href="day7.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
+                        <a href="nz_0221.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
                     </div>
                 </div>
 
@@ -252,7 +243,7 @@
                     </div>
                     <div class="card-actions">
                         <a href="https://maps.app.goo.gl/PfR9asC3ZNaYDRSM8" target="_blank" class="btn map-btn">📍 地圖導航</a>
-                        <a href="day8.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
+                        <a href="nz_0222.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
                     </div>
                 </div>
 
