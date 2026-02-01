@@ -1,193 +1,36 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>紐西蘭之旅 New Zealand Trip</title>
-    <style>
-        /* 基礎設定 */
-        :root {
-            --primary-color: #2c3e50; /* 深藍色 */
-            --accent-color: #27ae60;  /* 紐西蘭綠 */
-            --bg-color: #f4f7f6;
-            --card-bg: #ffffff;
-        }
-        body {
-            font-family: "Helvetica Neue", Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-color);
-            color: #333;
-            line-height: 1.6;
-        }
+<section id="stay" class="card">
+  <h2>🏨 住宿（已確認）</h2>
+  <div class="muted">點「地圖」可直接用 Google Maps 開導航。</div>
 
-        /* 頂部封面區 */
-        header {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1469521669194-babb45f83513?q=80&w=1920&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            height: 60vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            padding: 20px;
-        }
-        header h1 { font-size: 3rem; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-        header p { font-size: 1.2rem; margin-top: 10px; font-weight: 300; }
-
-        /* 行程容器 */
-        .container {
-            max-width: 800px;
-            margin: -50px auto 50px; /* 讓內容稍微往上蓋住圖片 */
-            padding: 20px;
-            position: relative;
-        }
-
-        /* 每日行程卡片 */
-        .day-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-            overflow: hidden;
-            border-left: 5px solid var(--accent-color);
-        }
-        .day-header {
-            background-color: #ecf0f1;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #eee;
-        }
-        .day-title { font-weight: bold; font-size: 1.2rem; color: var(--primary-color); }
-        .day-date { color: #7f8c8d; font-size: 0.9rem; }
-        
-        .day-content { padding: 20px; }
-        .time-slot {
-            display: flex;
-            margin-bottom: 15px;
-            align-items: flex-start;
-        }
-        .time {
-            min-width: 60px;
-            font-weight: bold;
-            color: var(--accent-color);
-            font-size: 0.9rem;
-            margin-top: 2px;
-        }
-        .activity { flex: 1; }
-        .activity strong { display: block; margin-bottom: 4px; color: #2c3e50; }
-        
-        /* 標籤樣式 */
-        .tag {
-            display: inline-block;
-            background: #e8f5e9;
-            color: #27ae60;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            margin-right: 5px;
-        }
-        .tag.flight { background: #e3f2fd; color: #2980b9; }
-        .tag.hotel { background: #fff3e0; color: #e67e22; }
-
-        /* 頁尾 */
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: #7f8c8d;
-            font-size: 0.9rem;
-        }
-
-        /* 響應式調整 */
-        @media (max-width: 600px) {
-            header h1 { font-size: 2rem; }
-            .container { margin-top: 0; }
-        }
-    </style>
-</head>
-<body>
-
-<header>
-    <div>
-        <h1>紐西蘭之旅 2026 ✈️ </h1>
-        <p>New Zealand Adventure</p>
-    </div>
-</header>
-
-<div class="container">
-    <div class="day-card">
-        <div class="day-header">
-            <span class="day-title">Day 1：出發與抵達</span>
-            <span class="day-date">2026/02/10 (二)</span>
-        </div>
-        <div class="day-content">
-            <div class="time-slot">
-                <div class="time">23:00</div>
-                <div class="activity">
-                    <strong>桃園機場起飛 (TPE)</strong>
-                    <span class="tag flight">航班 CI053</span>
-                    前往奧克蘭，準備好長途飛行！
-                </div>
-            </div>
-            <div class="time-slot">
-                <div class="time">14:30+1</div>
-                <div class="activity">
-                    <strong>抵達奧克蘭機場 (AKL)</strong>
-                    領取租車、購買 SIM 卡。
-                </div>
-            </div>
-            <div class="time-slot">
-                <div class="time">16:00</div>
-                <div class="activity">
-                    <strong>入住飯店</strong>
-                    <span class="tag hotel">SkyCity Hotel</span>
-                    市區稍微逛逛，調整時差。
-                </div>
-            </div>
-        </div>
+  <div class="grid two" style="margin-top:10px;">
+    <div class="card">
+      <b>2/15（日）｜基督城機場諾富特酒店</b>
+      <div class="muted">30 Durey Road, Christchurch Airport, Christchurch 8053, New Zealand</div>
+      <div style="margin-top:10px;">
+        <a class="btn" target="_blank" rel="noreferrer"
+          href="https://www.google.com/maps/search/?api=1&query=30%20Durey%20Road%2C%20Christchurch%20Airport%2C%20Christchurch%208053%2C%20New%20Zealand">地圖</a>
+      </div>
     </div>
 
-    <div class="day-card">
-        <div class="day-header">
-            <span class="day-title">Day 2：哈比屯與螢火蟲洞</span>
-            <span class="day-date">2026/02/11 (三)</span>
-        </div>
-        <div class="day-content">
-            <div class="time-slot">
-                <div class="time">09:00</div>
-                <div class="activity">
-                    <strong>前往 Matamata</strong>
-                    開車約 2 小時，沿途欣賞風景。
-                </div>
-            </div>
-            <div class="time-slot">
-                <div class="time">11:30</div>
-                <div class="activity">
-                    <strong>哈比屯 (Hobbiton) 導覽</strong>
-                    <span class="tag">景點</span>
-                    參觀魔戒拍攝場景，記得充好相機電！
-                </div>
-            </div>
-            <div class="time-slot">
-                <div class="time">16:00</div>
-                <div class="activity">
-                    <strong>懷托摩螢火蟲洞</strong>
-                    <span class="tag">體驗</span>
-                    搭船看藍光螢火蟲。
-                </div>
-            </div>
-        </div>
+    <div class="card">
+      <b>2/16（一）｜Haka House Lake Tekapo</b>
+      <div class="muted">5 Motuariki Lane, Lake Tekapo 7999, New Zealand</div>
+      <div style="margin-top:10px;">
+        <a class="btn" target="_blank" rel="noreferrer"
+          href="https://www.google.com/maps/search/?api=1&query=5%20Motuariki%20Lane%2C%20Lake%20Tekapo%207999%2C%20New%20Zealand">地圖</a>
+      </div>
     </div>
 
+    <div class="card">
+      <b>2/17（二）｜Queenstown Park Boutique Hotel</b>
+      <div class="muted">21 Robins Road, Queenstown 9300, New Zealand</div>
+      <div style="margin-top:10px;">
+        <a class="btn" target="_blank" rel="noreferrer"
+          href="https://www.google.com/maps/search/?api=1&query=21%20Robins%20Road%2C%20Queenstown%209300%2C%20New%20Zealand">地圖</a>
+        <span class="tag">連住</span>
+      </div>
     </div>
 
-<footer>
-    <p>Made for our NZ Trip 2026</p>
-</footer>
+    <div class="card">
+      <b>2/18（三）｜Queenstown Park Boutique H
 
-</body>
-</html>
