@@ -10,7 +10,7 @@
         :root {
             --primary-color: #2c3e50;
             --accent-color: #27ae60;
-            --flight-color: #2980b9;  /* 航班專用藍色 */
+            --flight-color: #2980b9;
             --pdf-color: #3498db;
             --bg-color: #f8f9fa;
             --sidebar-width: 260px;
@@ -69,7 +69,7 @@
             display: flex; align-items: center; gap: 10px;
         }
 
-        /* --- ✈️ 航班卡片樣式 (新功能) --- */
+        /* --- ✈️ 航班卡片樣式 --- */
         .flight-card {
             border: 1px solid #e0e0e0;
             border-radius: 12px;
@@ -79,21 +79,27 @@
             overflow: hidden;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             transition: transform 0.2s;
-        }
-        .flight-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-
-        /* 左側：航線與裝飾 */
-        .flight-main {
-            background: #fdfdfd;
-            padding: 25px;
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-right: 2px dashed #ddd;
             position: relative;
         }
-        /* 裝飾用的圓圈，模擬撕票口 */
+        .flight-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        
+        /* 標籤 (國際/國內) */
+        .flight-badge {
+            position: absolute; top: 0; left: 0;
+            background: #95a5a6; color: white;
+            font-size: 0.7rem; padding: 4px 10px;
+            border-bottom-right-radius: 10px;
+            z-index: 2; font-weight: bold;
+        }
+        .badge-intl { background: var(--flight-color); }
+        .badge-dom { background: var(--accent-color); }
+
+        /* 左側：航線 */
+        .flight-main {
+            background: #fdfdfd; padding: 25px; flex: 1;
+            display: flex; align-items: center; justify-content: space-between;
+            border-right: 2px dashed #ddd; position: relative;
+        }
         .flight-main::after, .flight-main::before {
             content: ''; position: absolute; right: -10px; width: 20px; height: 20px;
             background-color: var(--bg-color); border-radius: 50%;
@@ -102,300 +108,21 @@
         .flight-main::after { bottom: -10px; }
 
         .airport-code {
-            font-family: 'Oswald', sans-serif;
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            font-weight: bold;
-            line-height: 1;
+            font-family: 'Oswald', sans-serif; font-size: 2.2rem; color: var(--primary-color);
+            font-weight: bold; line-height: 1;
         }
+        .airport-city { font-size: 0.9rem; color: #888; }
+        
         .flight-route-visual {
-            flex: 1; text-align: center; color: var(--flight-color); padding: 0 20px;
+            flex: 1; text-align: center; color: var(--flight-color); padding: 0 15px;
         }
         .flight-duration { font-size: 0.8rem; color: #888; margin-top: 5px; display: block;}
 
         /* 右側：詳細時間 */
         .flight-details-panel {
-            flex: 0 0 35%; /* 佔寬度 35% */
-            padding: 25px;
-            background: #fafafa;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            flex: 0 0 35%; padding: 25px; background: #fafafa;
+            display: flex; flex-direction: column; justify-content: center;
         }
-        .flight-row { display: flex; justify-content: space-between; margin-bottom: 10px; }
-        .flight-label { font-size: 0.8rem; color: #888; text-transform: uppercase; }
-        .flight-value { font-weight: bold; color: #333; font-size: 1rem; }
-        .flight-number { color: var(--flight-color); font-weight: bold; background: #e3f2fd; padding: 2px 6px; border-radius: 4px; font-size: 0.9rem;}
-
-
-        /* 住宿卡片 */
-        .hotel-grid { display: grid; gap: 20px; }
-        .hotel-card {
-            border: 1px solid #eee; border-radius: 10px; padding: 20px;
-            display: flex; flex-direction: column; gap: 15px; transition: transform 0.2s;
-        }
-        .hotel-card:hover {
-            transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            border-color: var(--accent-color);
-        }
-        .hotel-header { width: 100%; }
-        .hotel-info h3 { margin: 0 0 5px 0; font-size: 1.1rem; color: #333; }
-        .hotel-info p { margin: 0; font-size: 0.9rem; color: #666; }
-        .hotel-day-badge {
-            background: #e3f2fd; color: #1565c0; padding: 4px 8px;
-            border-radius: 4px; font-size: 0.8rem; font-weight: bold;
-            margin-bottom: 8px; display: inline-block;
-        }
-        .card-actions {
-            display: flex; gap: 10px; width: 100%;
-            border-top: 1px dashed #eee; padding-top: 15px;
-        }
-        .btn {
-            text-decoration: none; padding: 8px 16px; border-radius: 20px;
-            font-size: 0.85rem; font-weight: bold; flex: 1;
-            display: flex; justify-content: center; align-items: center; gap: 6px;
-            transition: opacity 0.2s;
-        }
-        .btn:hover { opacity: 0.8; }
-        .map-btn { background: var(--accent-color); color: white; }
-        .pdf-btn { background: var(--pdf-color); color: white; }
-
-        /* 行程樣式 */
-        .day-item {
-            border-left: 4px solid #ddd; padding-left: 20px; margin-bottom: 30px; position: relative;
-        }
-        .day-item::before {
-            content: ''; width: 12px; height: 12px; background: var(--accent-color);
-            border-radius: 50%; position: absolute; left: -8px; top: 6px;
-        }
-        .day-header-text { font-weight: bold; color: var(--accent-color); font-size: 1.1rem; }
-        .day-title-text { font-size: 1.2rem; font-weight: bold; margin: 5px 0; color: var(--primary-color); }
-        .day-desc { color: #555; }
-
-        /* RWD */
-        @media (max-width: 800px) {
-            .layout-container { flex-direction: column; padding: 10px; }
-            aside.sidebar { width: auto; position: relative; top: 0; padding: 15px; }
-            .nav-menu { display: flex; gap: 10px; overflow-x: auto; white-space: nowrap; }
-            .card-actions { flex-direction: column; }
-            
-            /* 航班卡片手機版 */
-            .flight-card { flex-direction: column; }
-            .flight-main { border-right: none; border-bottom: 2px dashed #ddd; }
-            .flight-main::before, .flight-main::after { display: none; }
-            .flight-details-panel { flex: auto; padding: 20px; background: #fff; }
-        }
-    </style>
-</head>
-<body>
-
-<header class="hero">
-    <div>
-        <h1>紐西蘭 2026</h1>
-        <p>New Zealand Road Trip</p>
-    </div>
-</header>
-
-<div class="layout-container">
-    
-    <aside class="sidebar">
-        <ul class="nav-menu">
-            <li class="nav-item"><a href="#flights" class="nav-link"><span>✈️</span> 航班資訊</a></li>
-            <li class="nav-item"><a href="#accommodation" class="nav-link"><span>🏨</span> 住宿安排</a></li>
-            <li class="nav-item"><a href="#itinerary" class="nav-link"><span>🗓️</span> 每日行程</a></li>
-            <li class="nav-item"><a href="#reservations" class="nav-link"><span>🎫</span> 預約資訊</a></li>
-        </ul>
-    </aside>
-
-    <main class="content">
-
-        <section id="flights">
-            <h2>✈️ 航班資訊</h2>
-            
-            <div class="flight-card">
-                <div class="flight-main">
-                    <div class="airport-info">
-                        <div class="airport-code">TPE</div>
-                        <div class="airport-city">台北</div>
-                    </div>
-                    <div class="flight-route-visual">
-                        <span>✈️</span>
-                        <div style="border-top: 2px dotted #ccc; width: 100%; height: 1px; margin-top: -10px;"></div>
-                        <span class="flight-duration">直飛 / 轉機</span>
-                    </div>
-                    <div class="airport-info" style="text-align: right;">
-                        <div class="airport-code">AKL</div>
-                        <div class="airport-city">奧克蘭</div>
-                    </div>
-                </div>
-                <div class="flight-details-panel">
-                    <div class="flight-row">
-                        <div>
-                            <div class="flight-label">日期</div>
-                            <div class="flight-value">2026/02/10 (二)</div>
-                        </div>
-                        <div style="text-align: right;">
-                            <div class="flight-label">航班</div>
-                            <div class="flight-value flight-number">CI 053</div>
-                        </div>
-                    </div>
-                    <div class="flight-row">
-                        <div>
-                            <div class="flight-label">起飛</div>
-                            <div class="flight-value">23:00</div>
-                        </div>
-                        <div style="text-align: right;">
-                            <div class="flight-label">抵達</div>
-                            <div class="flight-value">14:30 (+1)</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flight-card">
-                <div class="flight-main">
-                    <div class="airport-info">
-                        <div class="airport-code">AKL</div>
-                        <div class="airport-city">奧克蘭</div>
-                    </div>
-                    <div class="flight-route-visual">
-                        <span>✈️</span>
-                        <div style="border-top: 2px dotted #ccc; width: 100%; height: 1px; margin-top: -10px;"></div>
-                        <span class="flight-duration">回程</span>
-                    </div>
-                    <div class="airport-info" style="text-align: right;">
-                        <div class="airport-code">TPE</div>
-                        <div class="airport-city">台北</div>
-                    </div>
-                </div>
-                <div class="flight-details-panel">
-                    <div class="flight-row">
-                        <div>
-                            <div class="flight-label">日期</div>
-                            <div class="flight-value">2026/02/24 (二)</div>
-                        </div>
-                        <div style="text-align: right;">
-                            <div class="flight-label">航班</div>
-                            <div class="flight-value flight-number">CI 054</div>
-                        </div>
-                    </div>
-                    <div class="flight-row">
-                        <div>
-                            <div class="flight-label">起飛</div>
-                            <div class="flight-value">19:30</div>
-                        </div>
-                        <div style="text-align: right;">
-                            <div class="flight-label">抵達</div>
-                            <div class="flight-value">05:55 (+1)</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-
-        <section id="accommodation">
-            <h2>🏨 住宿安排</h2>
-            <div class="hotel-grid">
-                
-                <div class="hotel-card">
-                    <div class="hotel-header">
-                        <span class="hotel-day-badge">Day 1 (02/15)</span>
-                        <div class="hotel-info">
-                            <h3>基督城機場諾富特酒店</h3>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <a href="https://maps.app.goo.gl/dQxjsP8NNvxcKjFh6" target="_blank" class="btn map-btn">📍 地圖導航</a>
-                        <a href="nz_0215.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
-                    </div>
-                </div>
-
-                <div class="hotel-card">
-                    <div class="hotel-header">
-                        <span class="hotel-day-badge">Day 2 (02/16)</span>
-                        <div class="hotel-info">
-                            <h3>Haka House Lake Tekapo</h3>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <a href="https://maps.app.goo.gl/sVeNhvjxdTd7ab12A" target="_blank" class="btn map-btn">📍 地圖導航</a>
-                        <a href="nz_0216.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
-                    </div>
-                </div>
-
-                <div class="hotel-card">
-                    <div class="hotel-header">
-                        <span class="hotel-day-badge">Day 3-4 (02/17-18)</span>
-                        <div class="hotel-info">
-                            <h3>Queenstown Park Boutique Hotel</h3>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <a href="https://maps.app.goo.gl/NtyVPwBb3XpaZmCH8" target="_blank" class="btn map-btn">📍 地圖導航</a>
-                        <a href="nz_0217.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
-                        <a href="nz_0218.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
-                    </div>
-                </div>
-
-                <div class="hotel-card">
-                    <div class="hotel-header">
-                        <span class="hotel-day-badge">Day 5 (02/19)</span>
-                        <div class="hotel-info">
-                            <h3>Radfords on the Lake</h3>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <a href="https://maps.app.goo.gl/dXTNbMoETZ9FPJ238" target="_blank" class="btn map-btn">📍 地圖導航</a>
-                        <a href="nz_0219.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
-                    </div>
-                </div>
-
-                <div class="hotel-card">
-                    <div class="hotel-header">
-                        <span class="hotel-day-badge">Day 6 (02/20)</span>
-                        <div class="hotel-info">
-                            <h3>Casa Nova House</h3>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <a href="https://maps.app.goo.gl/5W8tKdi4yNFSGpVn7" target="_blank" class="btn map-btn">📍 地圖導航</a>
-                        <a href="nz_0220.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
-                    </div>
-                </div>
-                
-                <div class="hotel-card">
-                    <div class="hotel-header">
-                        <span class="hotel-day-badge">Day 7 (02/21)</span>
-                        <div class="hotel-info">
-                            <h3>基督城假日皇冠酒店</h3>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <a href="https://maps.app.goo.gl/p56o5YQd7o5q6Tvv5" target="_blank" class="btn map-btn">📍 地圖導航</a>
-                        <a href="nz_0221.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
-                    </div>
-                </div>
-
-                <div class="hotel-card">
-                    <div class="hotel-header">
-                        <span class="hotel-day-badge">Day 8-9 (02/22-23)</span>
-                        <div class="hotel-info">
-                            <h3>Horizon by SkyCity</h3>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <a href="https://maps.app.goo.gl/PfR9asC3ZNaYDRSM8" target="_blank" class="btn map-btn">📍 地圖導航</a>
-                        <a href="nz_0222.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="itinerary">
-            <h2>🗓️ 每日行程</h2>
-            
-            <div class="day-item">
-                <div class="day-header-text">Day 1 - 02/15 (日)</div>
-                <div class="day-title-text">抵達基督城</div>
-                <div class="day-desc">全日
+        .flight-row { display: flex; justify-content: space-between; margin-bottom: 8px; }
+        .flight-label { font-size: 0.75rem; color: #999; text-transform: uppercase; }
+        .flight-value { font-weight: bold; color: #
