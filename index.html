@@ -1,36 +1,367 @@
-<section id="stay" class="card">
-  <h2>🏨 住宿（已確認）</h2>
-  <div class="muted">點「地圖」可直接用 Google Maps 開導航。</div>
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>紐西蘭之旅 2026</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #27ae60;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+        }
+        body {
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1469521669194-babb45f83513?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+        header h1 { font-size: 3rem; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        header p { font-size: 1.2rem; margin-top: 10px; font-weight: 300; }
+        .container {
+            max-width: 800px;
+            margin: -50px auto 50px;
+            padding: 20px;
+            position: relative;
+        }
+        .day-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            overflow: hidden;
+            border-left: 5px solid var(--accent-color);
+        }
+        .day-header {
+            background-color: #ecf0f1;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+        .day-title { font-weight: bold; font-size: 1.2rem; color: var(--primary-color); }
+        .day-date { color: #7f8c8d; font-size: 0.9rem; }
+        .day-content { padding: 20px; }
+        .time-slot {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: flex-start;
+        }
+        .time {
+            min-width: 60px;
+            font-weight: bold;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            margin-top: 2px;
+        }
+        .activity { flex: 1; }
+        .activity strong { display: block; margin-bottom: 4px; color: #2c3e50; }
+        .tag {
+            display: inline-block;
+            background: #e8f5e9;
+            color: #27ae60;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+        }
+        .tag.hotel { background: #fff3e0; color: #e67e22; }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 600px) {
+            header h1 { font-size: 2rem; }
+            .container { margin-top: 0; }
+            .day-header { flex-direction: column; align-items: flex-start; }
+            .day-date { margin-top: 5px; }
+        }
+    </style>
+</head>
+<body>
 
-  <div class="grid two" style="margin-top:10px;">
-    <div class="card">
-      <b>2/15（日）｜基督城機場諾富特酒店</b>
-      <div class="muted">30 Durey Road, Christchurch Airport, Christchurch 8053, New Zealand</div>
-      <div style="margin-top:10px;">
-        <a class="btn" target="_blank" rel="noreferrer"
-          href="https://www.google.com/maps/search/?api=1&query=30%20Durey%20Road%2C%20Christchurch%20Airport%2C%20Christchurch%208053%2C%20New%20Zealand">地圖</a>
-      </div>
+<header>
+    <div>
+        <h1>紐西蘭 2026</h1>
+        <p>New Zealand Road Trip</p>
+    </div>
+</header>
+
+<div class="container">
+
+    <div class="day-card">
+        <div class="day-header">
+            <span class="day-title">Day 1：抵達基督城</span>
+            <span class="day-date">2026-02-15 (日)</span>
+        </div>
+        <div class="day-content">
+            <div class="time-slot">
+                <div class="time">全日</div>
+                <div class="activity">
+                    <strong>抵達基督城 行程</strong>
+                    <span class="tag">自由探索</span>
+                    享受紐西蘭的美景！
+                </div>
+            </div>
+            <div class="time-slot">
+                <div class="time">住宿</div>
+                <div class="activity">
+                    <strong>基督城機場諾富特酒店</strong>
+                    <span class="tag hotel">飯店</span>
+                    <p style="font-size:0.85rem; color:#7f8c8d; margin-top:4px;">📍 30 Durey Road, Christchurch Airport, Christchurch 8053紐西蘭</p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="card">
-      <b>2/16（一）｜Haka House Lake Tekapo</b>
-      <div class="muted">5 Motuariki Lane, Lake Tekapo 7999, New Zealand</div>
-      <div style="margin-top:10px;">
-        <a class="btn" target="_blank" rel="noreferrer"
-          href="https://www.google.com/maps/search/?api=1&query=5%20Motuariki%20Lane%2C%20Lake%20Tekapo%207999%2C%20New%20Zealand">地圖</a>
-      </div>
+    <div class="day-card">
+        <div class="day-header">
+            <span class="day-title">Day 2：公路旅行</span>
+            <span class="day-date">2026-02-16 (一)</span>
+        </div>
+        <div class="day-content">
+            <div class="time-slot">
+                <div class="time">全日</div>
+                <div class="activity">
+                    <strong>公路旅行 行程</strong>
+                    <span class="tag">自由探索</span>
+                    享受紐西蘭的美景！
+                </div>
+            </div>
+            <div class="time-slot">
+                <div class="time">住宿</div>
+                <div class="activity">
+                    <strong>Haka House Lake Tekapo</strong>
+                    <span class="tag hotel">飯店</span>
+                    <p style="font-size:0.85rem; color:#7f8c8d; margin-top:4px;">📍 5 Motuariki Lane, Lake Tekapo 7999紐西蘭</p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="card">
-      <b>2/17（二）｜Queenstown Park Boutique Hotel</b>
-      <div class="muted">21 Robins Road, Queenstown 9300, New Zealand</div>
-      <div style="margin-top:10px;">
-        <a class="btn" target="_blank" rel="noreferrer"
-          href="https://www.google.com/maps/search/?api=1&query=21%20Robins%20Road%2C%20Queenstown%209300%2C%20New%20Zealand">地圖</a>
-        <span class="tag">連住</span>
-      </div>
+    <div class="day-card">
+        <div class="day-header">
+            <span class="day-title">Day 3：皇后鎮</span>
+            <span class="day-date">2026-02-17 (二)</span>
+        </div>
+        <div class="day-content">
+            <div class="time-slot">
+                <div class="time">全日</div>
+                <div class="activity">
+                    <strong>皇后鎮 行程</strong>
+                    <span class="tag">自由探索</span>
+                    享受紐西蘭的美景！
+                </div>
+            </div>
+            <div class="time-slot">
+                <div class="time">住宿</div>
+                <div class="activity">
+                    <strong>Queenstown Park Boutique Hotel</strong>
+                    <span class="tag hotel">飯店</span>
+                    <p style="font-size:0.85rem; color:#7f8c8d; margin-top:4px;">📍 21 Robins Road, Queenstown 9300紐西蘭</p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="card">
-      <b>2/18（三）｜Queenstown Park Boutique H
+    <div class="day-card">
+        <div class="day-header">
+            <span class="day-title">Day 4：皇后鎮</span>
+            <span class="day-date">2026-02-18 (三)</span>
+        </div>
+        <div class="day-content">
+            <div class="time-slot">
+                <div class="time">全日</div>
+                <div class="activity">
+                    <strong>皇后鎮 行程</strong>
+                    <span class="tag">自由探索</span>
+                    享受紐西蘭的美景！
+                </div>
+            </div>
+            <div class="time-slot">
+                <div class="time">住宿</div>
+                <div class="activity">
+                    <strong>Queenstown Park Boutique Hotel</strong>
+                    <span class="tag hotel">飯店</span>
+                    <p style="font-size:0.85rem; color:#7f8c8d; margin-top:4px;">📍 21 Robins Road, Queenstown 9300紐西蘭</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="day-card">
+        <div class="day-header">
+            <span class="day-title">Day 5：公路旅行</span>
+            <span class="day-date">2026-02-19 (四)</span>
+        </div>
+        <div class="day-content">
+            <div class="time-slot">
+                <div class="time">全日</div>
+                <div class="activity">
+                    <strong>公路旅行 行程</strong>
+                    <span class="tag">自由探索</span>
+                    享受紐西蘭的美景！
+                </div>
+            </div>
+            <div class="time-slot">
+                <div class="time">住宿</div>
+                <div class="activity">
+                    <strong>Radfords on the Lake</strong>
+                    <span class="tag hotel">飯店</span>
+                    <p style="font-size:0.85rem; color:#7f8c8d; margin-top:4px;">📍 56 Lakefront Drive, Te Anau 9600紐西蘭</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="day-card">
+        <div class="day-header">
+            <span class="day-title">Day 6：公路旅行</span>
+            <span class="day-date">2026-02-20 (五)</span>
+        </div>
+        <div class="day-content">
+            <div class="time-slot">
+                <div class="time">全日</div>
+                <div class="activity">
+                    <strong>公路旅行 行程</strong>
+                    <span class="tag">自由探索</span>
+                    享受紐西蘭的美景！
+                </div>
+            </div>
+            <div class="time-slot">
+                <div class="time">住宿</div>
+                <div class="activity">
+                    <strong>Casa Nova House</strong>
+                    <span class="tag hotel">飯店</span>
+                    <p style="font-size:0.85rem; color:#7f8c8d; margin-top:4px;">📍 1 Alt Street, Oamaru North, Oamaru 9400紐西蘭</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="day-card">
+        <div class="day-header">
+            <span class="day-title">Day 7：基督城</span>
+            <span class="day-date">2026-02-21 (六)</span>
+        </div>
+        <div class="day-content">
+            <div class="time-slot">
+                <div class="time">全日</div>
+                <div class="activity">
+                    <strong>基督城 行程</strong>
+                    <span class="tag">自由探索</span>
+                    享受紐西蘭的美景！
+                </div>
+            </div>
+            <div class="time-slot">
+                <div class="time">住宿</div>
+                <div class="activity">
+                    <strong>基督城假日皇冠酒店</strong>
+                    <span class="tag hotel">飯店</span>
+                    <p style="font-size:0.85rem; color:#7f8c8d; margin-top:4px;">📍 764 Colombo Street, Christchurch Central City, Christchurch 8011紐西蘭</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="day-card">
+        <div class="day-header">
+            <span class="day-title">Day 8：奧克蘭</span>
+            <span class="day-date">2026-02-22 (日)</span>
+        </div>
+        <div class="day-content">
+            <div class="time-slot">
+                <div class="time">全日</div>
+                <div class="activity">
+                    <strong>奧克蘭 行程</strong>
+                    <span class="tag">自由探索</span>
+                    享受紐西蘭的美景！
+                </div>
+            </div>
+            <div class="time-slot">
+                <div class="time">住宿</div>
+                <div class="activity">
+                    <strong>Horizon by SkyCity</strong>
+                    <span class="tag hotel">飯店</span>
+                    <p style="font-size:0.85rem; color:#7f8c8d; margin-top:4px;">📍 85 Hobson Street, Auckland Central, Auckland 1010紐西蘭</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="day-card">
+        <div class="day-header">
+            <span class="day-title">Day 9：奧克蘭</span>
+            <span class="day-date">2026-02-23 (一)</span>
+        </div>
+        <div class="day-content">
+            <div class="time-slot">
+                <div class="time">全日</div>
+                <div class="activity">
+                    <strong>奧克蘭 行程</strong>
+                    <span class="tag">自由探索</span>
+                    享受紐西蘭的美景！
+                </div>
+            </div>
+            <div class="time-slot">
+                <div class="time">住宿</div>
+                <div class="activity">
+                    <strong>Horizon by SkyCity</strong>
+                    <span class="tag hotel">飯店</span>
+                    <p style="font-size:0.85rem; color:#7f8c8d; margin-top:4px;">📍 85 Hobson Street, Auckland Central, Auckland 1010紐西蘭</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="day-card">
+        <div class="day-header">
+            <span class="day-title">Day 10：公路旅行</span>
+            <span class="day-date">2026-02-24 (二)</span>
+        </div>
+        <div class="day-content">
+            <div class="time-slot">
+                <div class="time">全日</div>
+                <div class="activity">
+                    <strong>公路旅行 行程</strong>
+                    <span class="tag">自由探索</span>
+                    享受紐西蘭的美景！
+                </div>
+            </div>
+            <div class="time-slot">
+                <div class="time">住宿</div>
+                <div class="activity">
+                    <strong>待定 / 返程</strong>
+                    <span class="tag hotel">飯店</span>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <p>Trip to New Zealand 2026</p>
+</footer>
+
+</body>
+</html>
