@@ -1,4 +1,160 @@
-<section id="accommodation">
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>紐西蘭之旅 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #2c3e50; /* 深藍 */
+            --accent-color: #27ae60;  /* 紐西蘭綠 */
+            --pdf-color: #3498db;     /* PDF 按鈕藍色 */
+            --bg-color: #f8f9fa;
+            --sidebar-width: 260px;
+        }
+        
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            margin: 0; padding: 0;
+            background-color: var(--bg-color);
+            color: #333; line-height: 1.6;
+        }
+
+        /* 封面 Header */
+        header.hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1575351666624-b152e93b4a26?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+            height: 45vh;
+            display: flex; justify-content: center; align-items: center;
+            text-align: center; color: white; margin-bottom: 20px;
+        }
+        header.hero h1 { font-size: 3rem; margin: 0; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        header.hero p { font-size: 1.2rem; margin-top: 10px; opacity: 0.9; }
+
+        /* 佈局容器 */
+        .layout-container {
+            display: flex; max-width: 1200px; margin: 0 auto; padding: 20px; gap: 40px;
+        }
+
+        /* 側邊欄 Sidebar */
+        aside.sidebar {
+            flex: 0 0 var(--sidebar-width); height: fit-content;
+            position: sticky; top: 40px;
+            background: white; padding: 30px; border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        .nav-menu { list-style: none; padding: 0; margin: 0; }
+        .nav-item { margin-bottom: 15px; }
+        .nav-link {
+            display: block; text-decoration: none; color: #7f8c8d; font-weight: 500;
+            padding: 12px 15px; border-radius: 8px; transition: all 0.3s ease;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .nav-link:hover { background-color: #e8f5e9; color: var(--accent-color); transform: translateX(5px); }
+        .nav-link.active { background-color: var(--accent-color); color: white; }
+
+        /* 主要內容 Main */
+        main.content { flex: 1; min-width: 0; }
+        section {
+            background: white; border-radius: 16px; padding: 40px; margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05); scroll-margin-top: 40px;
+        }
+        section h2 {
+            margin-top: 0; font-size: 1.8rem; color: var(--primary-color);
+            border-bottom: 3px solid var(--accent-color); padding-bottom: 15px; margin-bottom: 30px;
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        /* 住宿卡片樣式 Hotel Card */
+        .hotel-grid { display: grid; gap: 20px; }
+        .hotel-card {
+            border: 1px solid #eee; border-radius: 10px; padding: 20px;
+            display: flex; flex-direction: column; /* 垂直排列：上為資訊，下為按鈕 */
+            gap: 15px; transition: transform 0.2s;
+        }
+        .hotel-card:hover {
+            transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border-color: var(--accent-color);
+        }
+        
+        .hotel-header { width: 100%; }
+        .hotel-info h3 { margin: 0 0 5px 0; font-size: 1.1rem; color: #333; }
+        .hotel-info p { margin: 0; font-size: 0.9rem; color: #666; }
+        .hotel-day-badge {
+            background: #e3f2fd; color: #1565c0; padding: 4px 8px;
+            border-radius: 4px; font-size: 0.8rem; font-weight: bold;
+            margin-bottom: 8px; display: inline-block;
+        }
+
+        /* 按鈕區塊 */
+        .card-actions {
+            display: flex; gap: 10px; width: 100%;
+            border-top: 1px dashed #eee; padding-top: 15px;
+        }
+        
+        .btn {
+            text-decoration: none; padding: 8px 16px; border-radius: 20px;
+            font-size: 0.85rem; font-weight: bold; flex: 1;
+            display: flex; justify-content: center; align-items: center; gap: 6px;
+            transition: opacity 0.2s;
+        }
+        .btn:hover { opacity: 0.8; }
+        .map-btn { background: var(--accent-color); color: white; }
+        .pdf-btn { background: var(--pdf-color); color: white; }
+
+        /* 行程樣式 */
+        .day-item {
+            border-left: 4px solid #ddd; padding-left: 20px; margin-bottom: 30px; position: relative;
+        }
+        .day-item::before {
+            content: ''; width: 12px; height: 12px; background: var(--accent-color);
+            border-radius: 50%; position: absolute; left: -8px; top: 6px;
+        }
+        .day-header-text { font-weight: bold; color: var(--accent-color); font-size: 1.1rem; }
+        .day-title-text { font-size: 1.2rem; font-weight: bold; margin: 5px 0; color: var(--primary-color); }
+        .day-desc { color: #555; }
+
+        /* 表格樣式 */
+        .info-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+        .info-table th, .info-table td { padding: 15px; border-bottom: 1px solid #eee; text-align: left; }
+        .info-table th { background-color: #f8f9fa; color: #555; width: 30%; }
+        .status-tag { background: #fff3e0; color: #e67e22; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; }
+        .status-tag.ok { background: #e8f5e9; color: #27ae60; }
+
+        /* RWD 手機版 */
+        @media (max-width: 800px) {
+            .layout-container { flex-direction: column; padding: 10px; }
+            aside.sidebar { width: auto; position: relative; top: 0; padding: 15px; }
+            .nav-menu { display: flex; gap: 10px; overflow-x: auto; white-space: nowrap; }
+            .card-actions { flex-direction: column; } /* 手機版按鈕垂直排列較好點 */
+        }
+    </style>
+</head>
+<body>
+
+<header class="hero">
+    <div>
+        <h1>紐西蘭 2026</h1>
+        <p>New Zealand Road Trip</p>
+    </div>
+</header>
+
+<div class="layout-container">
+    
+    <aside class="sidebar">
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="#accommodation" class="nav-link"><span>🏨</span> 住宿安排</a></li>
+            <li class="nav-item"><a href="#itinerary" class="nav-link"><span>🗓️</span> 每日行程</a></li>
+            <li class="nav-item"><a href="#reservations" class="nav-link"><span>🎫</span> 預約資訊</a></li>
+        </ul>
+    </aside>
+
+    <main class="content">
+
+        <section id="accommodation">
             <h2>🏨 住宿安排</h2>
             <div class="hotel-grid">
                 
@@ -12,7 +168,7 @@
                     </div>
                     <div class="card-actions">
                         <a href="https://maps.app.goo.gl/dQxjsP8NNvxcKjFh6" target="_blank" class="btn map-btn">📍 地圖導航</a>
-                        <a href="nz_0215.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
+                        <a href="day1.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
                     </div>
                 </div>
 
@@ -26,7 +182,7 @@
                     </div>
                     <div class="card-actions">
                         <a href="https://maps.app.goo.gl/sVeNhvjxdTd7ab12A" target="_blank" class="btn map-btn">📍 地圖導航</a>
-                        <a href="nz_0216.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
+                        <a href="day2.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
                     </div>
                 </div>
 
@@ -40,7 +196,7 @@
                     </div>
                     <div class="card-actions">
                         <a href="https://maps.app.goo.gl/NtyVPwBb3XpaZmCH8" target="_blank" class="btn map-btn">📍 地圖導航</a>
-                        <a href="nz_0217.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
+                        <a href="day3.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
                     </div>
                 </div>
 
@@ -54,7 +210,7 @@
                     </div>
                     <div class="card-actions">
                         <a href="https://maps.app.goo.gl/dXTNbMoETZ9FPJ238" target="_blank" class="btn map-btn">📍 地圖導航</a>
-                        <a href="nz_0219.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
+                        <a href="day5.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
                     </div>
                 </div>
 
@@ -68,7 +224,7 @@
                     </div>
                     <div class="card-actions">
                         <a href="https://maps.app.goo.gl/5W8tKdi4yNFSGpVn7" target="_blank" class="btn map-btn">📍 地圖導航</a>
-                        <a href="nz_0220.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
+                        <a href="day6.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
                     </div>
                 </div>
                 
@@ -82,7 +238,7 @@
                     </div>
                     <div class="card-actions">
                         <a href="https://maps.app.goo.gl/p56o5YQd7o5q6Tvv5" target="_blank" class="btn map-btn">📍 地圖導航</a>
-                        <a href="nz_0221.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
+                        <a href="day7.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
                     </div>
                 </div>
 
@@ -96,9 +252,91 @@
                     </div>
                     <div class="card-actions">
                         <a href="https://maps.app.goo.gl/PfR9asC3ZNaYDRSM8" target="_blank" class="btn map-btn">📍 地圖導航</a>
-                        <a href="nz_0222.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
+                        <a href="day8.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
                     </div>
                 </div>
 
             </div>
         </section>
+
+        <section id="itinerary">
+            <h2>🗓️ 每日行程</h2>
+            
+            <div class="day-item">
+                <div class="day-header-text">Day 1 - 02/15 (日)</div>
+                <div class="day-title-text">抵達基督城</div>
+                <div class="day-desc">全日：自由探索與休息。領取租車，準備開始公路旅行。</div>
+            </div>
+
+            <div class="day-item">
+                <div class="day-header-text">Day 2 - 02/16 (一)</div>
+                <div class="day-title-text">前往 Lake Tekapo</div>
+                <div class="day-desc">欣賞著名的好牧羊人教堂與蒂卡波湖美景。</div>
+            </div>
+
+            <div class="day-item">
+                <div class="day-header-text">Day 3 - 02/17 (二)</div>
+                <div class="day-title-text">皇后鎮 (Queenstown)</div>
+                <div class="day-desc">冒險之都！可以安排搭乘纜車或湖畔散步。</div>
+            </div>
+
+            <div class="day-item">
+                <div class="day-header-text">Day 4 - 02/18 (三)</div>
+                <div class="day-title-text">皇后鎮 深度遊</div>
+                <div class="day-desc">全日探索皇后鎮周邊，或參加極限運動行程。</div>
+            </div>
+
+            <div class="day-item">
+                <div class="day-header-text">Day 5 - 02/19 (四)</div>
+                <div class="day-title-text">前往 Te Anau</div>
+                <div class="day-desc">米爾福德峽灣的前哨站，參觀螢火蟲洞。</div>
+            </div>
+
+             <div class="day-item">
+                <div class="day-header-text">Day 6 - 02/20 (五)</div>
+                <div class="day-title-text">Oamaru 企鵝小鎮</div>
+                <div class="day-desc">欣賞維多利亞式建築，晚上有機會看到藍企鵝歸巢。</div>
+            </div>
+
+             <div class="day-item">
+                <div class="day-header-text">Day 7 - 02/21 (六)</div>
+                <div class="day-title-text">返回基督城</div>
+                <div class="day-desc">南島行程的尾聲，準備隔天飛往北島。</div>
+            </div>
+
+             <div class="day-item">
+                <div class="day-header-text">Day 8 - 02/22 (日)</div>
+                <div class="day-title-text">奧克蘭 (Auckland)</div>
+                <div class="day-desc">飛抵帆船之都奧克蘭，體驗城市風光。</div>
+            </div>
+
+             <div class="day-item">
+                <div class="day-header-text">Day 9 - 02/23 (一)</div>
+                <div class="day-title-text">奧克蘭 周邊探索</div>
+                <div class="day-desc">可前往懷赫科島 (Waiheke Island) 或市區購物。</div>
+            </div>
+
+             <div class="day-item">
+                <div class="day-header-text">Day 10 - 02/24 (二)</div>
+                <div class="day-title-text">返程</div>
+                <div class="day-desc">收拾行囊，帶著滿滿回憶回家。</div>
+            </div>
+        </section>
+
+        <section id="reservations">
+            <h2>🎫 預約與票券資訊</h2>
+            <p>請確認以下預約項目已完成付款與確認。</p>
+            
+            <table class="info-table">
+                <tr><th>項目</th><th>詳細資訊</th><th>狀態</th></tr>
+                <tr><td>🛫 去程機票</td><td>CI053 台北 -> 奧克蘭<br>02/10 23:00 起飛</td><td><span class="status-tag ok">已開票</span></td></tr>
+                <tr><td>🚗 租車 (南島)</td><td>Apex Car Rentals (基督城機場)<br>車型：Toyota RAV4</td><td><span class="status-tag">待確認</span></td></tr>
+                <tr><td>🚢 米爾福德峽灣</td><td>RealNZ Cruises<br>02/19 13:00 場次</td><td><span class="status-tag ok">已預約</span></td></tr>
+            </table>
+        </section>
+
+    </main>
+</div>
+
+</body>
+</html>
