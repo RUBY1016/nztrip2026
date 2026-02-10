@@ -83,7 +83,6 @@
         }
         .flight-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         
-        /* 標籤 (國際/國內) */
         .flight-badge {
             position: absolute; top: 0; left: 0;
             background: #95a5a6; color: white;
@@ -94,7 +93,6 @@
         .badge-intl { background: var(--flight-color); }
         .badge-dom { background: var(--accent-color); }
 
-        /* 左側：航線 */
         .flight-main {
             background: #fdfdfd; padding: 25px; flex: 1;
             display: flex; align-items: center; justify-content: space-between;
@@ -112,13 +110,11 @@
             font-weight: bold; line-height: 1;
         }
         .airport-city { font-size: 0.9rem; color: #888; }
-        
         .flight-route-visual {
             flex: 1; text-align: center; color: var(--flight-color); padding: 0 15px;
         }
         .flight-duration { font-size: 0.8rem; color: #888; margin-top: 5px; display: block;}
 
-        /* 右側：詳細時間 */
         .flight-details-panel {
             flex: 0 0 35%; padding: 25px; background: #fafafa;
             display: flex; flex-direction: column; justify-content: center;
@@ -161,17 +157,51 @@
         .map-btn { background: var(--accent-color); color: white; }
         .pdf-btn { background: var(--pdf-color); color: white; }
 
-        /* 行程樣式 */
-        .day-item {
-            border-left: 4px solid #ddd; padding-left: 20px; margin-bottom: 30px; position: relative;
+        /* --- 🆕 新版行程樣式 (Activity List) --- */
+        .itinerary-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--accent-color);
         }
-        .day-item::before {
-            content: ''; width: 12px; height: 12px; background: var(--accent-color);
-            border-radius: 50%; position: absolute; left: -8px; top: 6px;
+        .itinerary-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px;
         }
-        .day-header-text { font-weight: bold; color: var(--accent-color); font-size: 1.1rem; }
-        .day-title-text { font-size: 1.2rem; font-weight: bold; margin: 5px 0; color: var(--primary-color); }
-        .day-desc { color: #555; }
+        .itinerary-date { font-weight: bold; color: var(--accent-color); font-size: 1.1rem; }
+        .itinerary-city { color: #888; font-size: 0.9rem; font-weight: 500; }
+        
+        .activity-list {
+            list-style: none; padding: 0; margin: 0;
+            display: flex; flex-wrap: wrap; gap: 10px;
+        }
+        .activity-btn {
+            text-decoration: none;
+            background-color: #f1f8e9;
+            color: #33691e;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid #dcedc8;
+            transition: all 0.2s;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .activity-btn:hover {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* 預約表格 */
+        .info-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+        .info-table th, .info-table td { padding: 15px; border-bottom: 1px solid #eee; text-align: left; }
+        .info-table th { background-color: #f8f9fa; color: #555; width: 30%; }
+        .status-tag { background: #fff3e0; color: #e67e22; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; }
+        .status-tag.ok { background: #e8f5e9; color: #27ae60; }
 
         /* RWD */
         @media (max-width: 800px) {
@@ -179,11 +209,11 @@
             aside.sidebar { width: auto; position: relative; top: 0; padding: 15px; }
             .nav-menu { display: flex; gap: 10px; overflow-x: auto; white-space: nowrap; }
             .card-actions { flex-direction: column; }
-            
             .flight-card { flex-direction: column; }
             .flight-main { border-right: none; border-bottom: 2px dashed #ddd; }
             .flight-main::before, .flight-main::after { display: none; }
             .flight-details-panel { flex: auto; padding: 20px; background: #fff; }
+            .activity-btn { width: 100%; justify-content: center; } /* 手機版活動按鈕變寬 */
         }
     </style>
 </head>
@@ -243,18 +273,18 @@
                     <div class="flight-row">
                         <div>
                             <div class="flight-label">起飛</div>
-                            <div class="flight-value">23:55</div>
+                            <div class="flight-value">23:00</div>
                         </div>
                         <div style="text-align: right;">
                             <div class="flight-label">抵達</div>
-                            <div class="flight-value">19:10 (+1)</div>
+                            <div class="flight-value">18:00 (+1)</div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="flight-card">
-                <div class="flight-badge badge-dom">國內線</div>
+                <div class="flight-badge badge-dom">國內線 (轉機)</div>
                 <div class="flight-main">
                     <div class="airport-info">
                         <div class="airport-code">AKL</div>
@@ -263,7 +293,7 @@
                     <div class="flight-route-visual">
                         <span>✈️</span>
                         <div style="border-top: 2px dotted #ccc; width: 100%; height: 1px; margin-top: -10px;"></div>
-                        <span class="flight-duration">往南島</span>
+                        <span class="flight-duration">轉國內線</span>
                     </div>
                     <div class="airport-info" style="text-align: right;">
                         <div class="airport-code">CHC</div>
@@ -295,7 +325,7 @@
             </div>
 
             <div class="flight-card">
-                <div class="flight-badge badge-dom">國內線</div>
+                <div class="flight-badge badge-dom">國內線 (移動)</div>
                 <div class="flight-main">
                     <div class="airport-info">
                         <div class="airport-code">CHC</div>
@@ -304,7 +334,7 @@
                     <div class="flight-route-visual">
                         <span>✈️</span>
                         <div style="border-top: 2px dotted #ccc; width: 100%; height: 1px; margin-top: -10px;"></div>
-                        <span class="flight-duration">往北島</span>
+                        <span class="flight-duration">前往北島</span>
                     </div>
                     <div class="airport-info" style="text-align: right;">
                         <div class="airport-code">AKL</div>
@@ -366,11 +396,11 @@
                     <div class="flight-row">
                         <div>
                             <div class="flight-label">起飛</div>
-                            <div class="flight-value">20:50</div>
+                            <div class="flight-value">19:30</div>
                         </div>
                         <div style="text-align: right;">
                             <div class="flight-label">抵達</div>
-                            <div class="flight-value">05:50 (+1)</div>
+                            <div class="flight-value">05:55 (+1)</div>
                         </div>
                     </div>
                 </div>
@@ -485,56 +515,132 @@
         <section id="itinerary">
             <h2>🗓️ 每日行程</h2>
             
-            <div class="day-item">
-                <div class="day-header-text">Day 1 - 02/15 (日)</div>
-                <div class="day-title-text">抵達基督城 (南島起點)</div>
-                <div class="day-desc">搭乘國內線抵達基督城，領取租車，入住機場附近飯店休息，準備明日的公路旅行。</div>
+            <div class="itinerary-card">
+                <div class="itinerary-header">
+                    <span class="itinerary-date">Day 1 (02/15)</span>
+                    <span class="itinerary-city">奧克蘭 ➔ 基督城</span>
+                </div>
+                <div class="activity-list">
+                    <a href="https://www.google.com/maps/search/?api=1&query=Activity+Name" target="_blank" class="activity-btn">📍 抵達基督城機場 (國內線)</a>
+                    <a href="https://maps.app.goo.gl/dQxjsP8NNvxcKjFh6" target="_blank" class="activity-btn">📍 入住 Novotel</a>
+                </div>
             </div>
-            <div class="day-item">
-                <div class="day-header-text">Day 2 - 02/16 (一)</div>
-                <div class="day-title-text">前往 Lake Tekapo</div>
-                <div class="day-desc">欣賞著名的好牧羊人教堂與蒂卡波湖美景。</div>
+
+            <div class="itinerary-card">
+                <div class="itinerary-header">
+                    <span class="itinerary-date">Day 2 (02/16)</span>
+                    <span class="itinerary-city">基督城 ➔ Lake Tekapo</span>
+                </div>
+                <div class="activity-list">
+                    <a href="https://www.google.com/maps/search/?api=1&query=Activity+Name+New+Zealand" target="_blank" class="activity-btn">📍 SIXT 取車</a>
+                    <a href="https://maps.google.com/?q=基督城機場諾富特酒店+30+Durey+Road7" target="_blank" class="activity-btn">📍 超市補給 (Supermarket)</a>
+                    <a href="https://maps.google.com/?q=基督城機場諾富特酒店+30+Durey+Road8" target="_blank" class="activity-btn">📍 基督城大教堂</a>
+                    <a href="https://maps.google.com/?q=基督城機場諾富特酒店+30+Durey+Road9" target="_blank" class="activity-btn">📍 藝術中心 (Arts Centre)</a>
+                    <a href="https://maps.google.com/?q=Haka+House+Lake+Tekapo+5+Motuariki+Lane0" target="_blank" class="activity-btn">📍 新攝政街 (New Regent St)</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=5+Motuariki+Lane,+Lake+Tekapo" target="_blank" class="activity-btn">📍 特卡波湖 (Lake Tekapo)</a>
+                    <a href="https://maps.google.com/?q=Haka+House+Lake+Tekapo+5+Motuariki+Lane1" target="_blank" class="activity-btn">📍 好牧羊人教堂</a>
+                </div>
             </div>
-            <div class="day-item">
-                <div class="day-header-text">Day 3 - 02/17 (二)</div>
-                <div class="day-title-text">皇后鎮 (Queenstown)</div>
-                <div class="day-desc">冒險之都！可以安排搭乘纜車或湖畔散步。</div>
+
+            <div class="itinerary-card">
+                <div class="itinerary-header">
+                    <span class="itinerary-date">Day 3 (02/17)</span>
+                    <span class="itinerary-city">Tekapo ➔ Wanaka ➔ 皇后鎮</span>
+                </div>
+                <div class="activity-list">
+                    <a href="https://maps.google.com/?q=Haka+House+Lake+Tekapo+5+Motuariki+Lane2" target="_blank" class="activity-btn">📍 庫克山胡克山谷步道 (Hooker Valley Track)</a>
+                    <a href="https://maps.google.com/?q=Haka+House+Lake+Tekapo+5+Motuariki+Lane3" target="_blank" class="activity-btn">📍 瓦納卡孤獨樹 (That Wanaka Tree)</a>
+                    <a href="https://maps.app.goo.gl/NtyVPwBb3XpaZmCH8" target="_blank" class="activity-btn">📍 抵達皇后鎮</a>
+                </div>
             </div>
-            <div class="day-item">
-                <div class="day-header-text">Day 4 - 02/18 (三)</div>
-                <div class="day-title-text">皇后鎮 深度遊</div>
-                <div class="day-desc">全日探索皇后鎮周邊，或參加極限運動行程。</div>
+
+            <div class="itinerary-card">
+                <div class="itinerary-header">
+                    <span class="itinerary-date">Day 4 (02/18)</span>
+                    <span class="itinerary-city">皇后鎮 (Queenstown)</span>
+                </div>
+                <div class="activity-list">
+                    <a href="https://maps.google.com/?q=Haka+House+Lake+Tekapo+5+Motuariki+Lane4" target="_blank" class="activity-btn">📍 高空跳傘 (Skydiving)</a>
+                    <a href="https://maps.google.com/?q=Haka+House+Lake+Tekapo+5+Motuariki+Lane5" target="_blank" class="activity-btn">📍 噴射快艇 (Jet Boat)</a>
+                    <a href="https://maps.app.goo.gl/NtyVPwBb3XpaZmCH8" target="_blank" class="activity-btn">📍 皇后鎮自由活動</a>
+                </div>
             </div>
-            <div class="day-item">
-                <div class="day-header-text">Day 5 - 02/19 (四)</div>
-                <div class="day-title-text">前往 Te Anau</div>
-                <div class="day-desc">米爾福德峽灣的前哨站，參觀螢火蟲洞。</div>
+
+            <div class="itinerary-card">
+                <div class="itinerary-header">
+                    <span class="itinerary-date">Day 5 (02/19)</span>
+                    <span class="itinerary-city">米爾福德峽灣 (Milford Sound)</span>
+                </div>
+                <div class="activity-list">
+                    <a href="#" class="activity-btn">📍 06:00 出發</a>
+                    <a href="https://maps.google.com/?q=Haka+House+Lake+Tekapo+5+Motuariki+Lane6" target="_blank" class="activity-btn">📍 鏡湖 (Mirror Lakes)</a>
+                    <a href="https://maps.google.com/?q=Haka+House+Lake+Tekapo+5+Motuariki+Lane7" target="_blank" class="activity-btn">📍 猴子溪 (Monkey Creek)</a>
+                    <a href="https://maps.google.com/?q=Haka+House+Lake+Tekapo+5+Motuariki+Lane8" target="_blank" class="activity-btn">📍 荷馬隧道 (Homer Tunnel)</a>
+                    <a href="https://maps.google.com/?q=Haka+House+Lake+Tekapo+5+Motuariki+Lane9" target="_blank" class="activity-btn">📍 米爾福德峽灣遊船</a>
+                    <a href="https://maps.app.goo.gl/dXTNbMoETZ9FPJ238" target="_blank" class="activity-btn">📍 入住 Te Anau</a>
+                </div>
             </div>
-             <div class="day-item">
-                <div class="day-header-text">Day 6 - 02/20 (五)</div>
-                <div class="day-title-text">Oamaru 企鵝小鎮</div>
-                <div class="day-desc">欣賞維多利亞式建築，晚上有機會看到藍企鵝歸巢。</div>
+
+            <div class="itinerary-card">
+                <div class="itinerary-header">
+                    <span class="itinerary-date">Day 6 (02/20)</span>
+                    <span class="itinerary-city">Te Anau ➔ Dunedin ➔ Oamaru</span>
+                </div>
+                <div class="activity-list">
+                    <a href="https://www.google.com/maps/search/?api=1&query=基督城機場諾富特酒店+Novotel+Christchurch+Airport0" target="_blank" class="activity-btn">📍 鮑德溫街 (世界最陡街道)</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=基督城機場諾富特酒店+Novotel+Christchurch+Airport1" target="_blank" class="activity-btn">📍 八角廣場 (The Octagon)</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=基督城機場諾富特酒店+Novotel+Christchurch+Airport2" target="_blank" class="activity-btn">📍 但尼丁火車站</a>
+                    <a href="https://maps.app.goo.gl/5W8tKdi4yNFSGpVn7" target="_blank" class="activity-btn">📍 入住 Oamaru</a>
+                </div>
             </div>
-             <div class="day-item">
-                <div class="day-header-text">Day 7 - 02/21 (六)</div>
-                <div class="day-title-text">返回基督城</div>
-                <div class="day-desc">南島行程的尾聲，準備隔天飛往北島。</div>
+
+            <div class="itinerary-card">
+                <div class="itinerary-header">
+                    <span class="itinerary-date">Day 7 (02/21)</span>
+                    <span class="itinerary-city">Oamaru ➔ 基督城</span>
+                </div>
+                <div class="activity-list">
+                    <a href="https://www.google.com/maps/search/?api=1&query=基督城機場諾富特酒店+Novotel+Christchurch+Airport3" target="_blank" class="activity-btn">📍 摩拉基大圓石 (Moeraki Boulders)</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=基督城機場諾富特酒店+Novotel+Christchurch+Airport4" target="_blank" class="activity-btn">📍 藍企鵝歸巢 (Blue Penguin Colony)</a>
+                    <a href="https://maps.app.goo.gl/p56o5YQd7o5q6Tvv5" target="_blank" class="activity-btn">📍 基督城還車</a>
+                </div>
             </div>
-             <div class="day-item">
-                <div class="day-header-text">Day 8 - 02/22 (日)</div>
-                <div class="day-title-text">移動日：飛往奧克蘭</div>
-                <div class="day-desc">搭乘早班飛機前往北島，入住奧克蘭市中心，開始城市探索。</div>
+
+            <div class="itinerary-card">
+                <div class="itinerary-header">
+                    <span class="itinerary-date">Day 8 (02/22)</span>
+                    <span class="itinerary-city">基督城 ➔ 奧克蘭</span>
+                </div>
+                <div class="activity-list">
+                    <a href="https://maps.app.goo.gl/dQxjsP8NNvxcKjFh6" target="_blank" class="activity-btn">📍 前往基督城機場</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=30+Durey+Road,+Christchurch+Airport" target="_blank" class="activity-btn">📍 抵達奧克蘭</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=基督城機場諾富特酒店+Novotel+Christchurch+Airport5" target="_blank" class="activity-btn">📍 天空塔 (Sky Tower)</a>
+                    <a href="https://maps.app.goo.gl/PfR9asC3ZNaYDRSM8" target="_blank" class="activity-btn">📍 入住 Horizon by SkyCity</a>
+                </div>
             </div>
-             <div class="day-item">
-                <div class="day-header-text">Day 9 - 02/23 (一)</div>
-                <div class="day-title-text">奧克蘭 周邊探索</div>
-                <div class="day-desc">可前往懷赫科島 (Waiheke Island) 或市區購物。</div>
+
+            <div class="itinerary-card">
+                <div class="itinerary-header">
+                    <span class="itinerary-date">Day 9 (02/23)</span>
+                    <span class="itinerary-city">奧克蘭 (Auckland)</span>
+                </div>
+                <div class="activity-list">
+                    <a href="https://www.google.com/maps/search/?api=1&query=基督城機場諾富特酒店+Novotel+Christchurch+Airport6" target="_blank" class="activity-btn">📍 懷赫科島 (Waiheke Island)</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=基督城機場諾富特酒店+Novotel+Christchurch+Airport7" target="_blank" class="activity-btn">📍 皇后街購物 (Queen Street)</a>
+                </div>
             </div>
-             <div class="day-item">
-                <div class="day-header-text">Day 10 - 02/24 (二)</div>
-                <div class="day-title-text">返程</div>
-                <div class="day-desc">晚上前往奧克蘭機場，搭乘班機返回溫暖的家。</div>
+
+            <div class="itinerary-card">
+                <div class="itinerary-header">
+                    <span class="itinerary-date">Day 10 (02/24)</span>
+                    <span class="itinerary-city">奧克蘭 ➔ 台北</span>
+                </div>
+                <div class="activity-list">
+                    <a href="https://www.google.com/maps/search/?api=1&query=30+Durey+Road,+Christchurch+Airport" target="_blank" class="activity-btn">📍 前往奧克蘭機場 (AKL)</a>
+                    <a href="#" class="activity-btn">📍 平安返家 ✈️</a>
+                </div>
             </div>
+            
         </section>
 
         <section id="reservations">
@@ -542,8 +648,9 @@
             <p>請確認以下預約項目已完成付款與確認。</p>
             <table class="info-table">
                 <tr><th>項目</th><th>詳細資訊</th><th>狀態</th></tr>
-                <tr><td>🚗 租車 (南島)</td><td>Apex Car Rentals (基督城機場)<br>車型：Toyota RAV4</td><td><span class="status-tag">待確認</span></td></tr>
+                <tr><td>🚗 租車 (南島)</td><td>SIXT Car Rental (基督城機場取還)</td><td><span class="status-tag">待確認</span></td></tr>
                 <tr><td>🚢 米爾福德峽灣</td><td>RealNZ Cruises<br>02/19 13:00 場次</td><td><span class="status-tag ok">已預約</span></td></tr>
+                <tr><td>🪂 高空跳傘</td><td>Nzone Skydive<br>02/18 上午</td><td><span class="status-tag">待確認</span></td></tr>
             </table>
         </section>
 
