@@ -8,14 +8,14 @@
     
     <style>
         :root {
-            /* --- 您的專屬配色 --- */
-            --primary-color: #84572F; /* 深棕色：文字、標題 */
-            --accent-color: #F1A805;  /* 金黃色：重點、地圖按鈕 */
-            --flight-color: #92ADA4;  /* 鼠尾草綠：航班元素 */
-            --pdf-color: #B3D9E0;     /* 莫蘭迪藍：PDF按鈕 */
-            --bg-color: #EDD5C0;      /* 暖米色：網頁大背景 */
-            --sidebar-bg: #F2D6A1;    /* 奶油黃：側邊欄背景 */
+            /* --- 您的清新奶油藍配色 --- */
+            --primary-color: #79A3CE; /* 天空藍：標題、邊框 */
+            --accent-color: #F0DC84;  /* 奶油黃：重點按鈕、裝飾 */
+            --flight-color: #B4CCD2;  /* 粉藍灰：航班資訊 */
+            --pdf-color: #B4CCD2;     /* 粉藍灰：PDF按鈕 */
+            --bg-color: #F7F7E0;      /* 奶油白：整體背景 */
             
+            --text-color: #555555;    /* 深灰色：內文 (確保閱讀清晰) */
             --sidebar-width: 260px;
         }
         
@@ -23,20 +23,21 @@
         body {
             font-family: 'Noto Sans TC', sans-serif;
             margin: 0; padding: 0;
-            background-color: var(--bg-color); /* 使用暖米色背景 */
-            color: var(--primary-color);       /* 使用深棕色文字 */
+            background-color: var(--bg-color); /* 奶油白背景 */
+            color: var(--text-color);          /* 深灰內文 */
             line-height: 1.6;
         }
 
         /* Header */
         header.hero {
-            background: linear-gradient(rgba(132, 87, 47, 0.4), rgba(132, 87, 47, 0.4)), url('https://images.unsplash.com/photo-1575351666624-b152e93b4a26?q=80&w=1920&auto=format&fit=crop');
+            /* 使用天空藍的遮罩 */
+            background: linear-gradient(rgba(121, 163, 206, 0.3), rgba(121, 163, 206, 0.3)), url('https://images.unsplash.com/photo-1575351666624-b152e93b4a26?q=80&w=1920&auto=format&fit=crop');
             background-size: cover; background-position: center;
             height: 45vh;
             display: flex; justify-content: center; align-items: center;
             text-align: center; color: white; margin-bottom: 20px;
         }
-        header.hero h1 { font-size: 3rem; margin: 0; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        header.hero h1 { font-size: 3rem; margin: 0; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
         header.hero p { font-size: 1.2rem; margin-top: 10px; opacity: 0.95; font-weight: 500; }
 
         /* Layout */
@@ -48,23 +49,26 @@
         aside.sidebar {
             flex: 0 0 var(--sidebar-width); height: fit-content;
             position: sticky; top: 40px;
-            background: var(--sidebar-bg); /* 使用奶油黃背景 */
+            background: white; 
             padding: 30px; border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(132, 87, 47, 0.1);
+            /* 輕柔的藍色陰影 */
+            box-shadow: 0 4px 20px rgba(121, 163, 206, 0.15);
+            border: 2px solid white;
         }
         .nav-menu { list-style: none; padding: 0; margin: 0; }
         .nav-item { margin-bottom: 15px; }
         .nav-link {
             display: block; text-decoration: none; 
-            color: var(--primary-color); /* 深棕色文字 */
+            color: #888; 
             font-weight: 500;
             padding: 12px 15px; border-radius: 8px; transition: all 0.3s ease;
             display: flex; align-items: center; gap: 10px;
-            background: rgba(255,255,255,0.4); /* 半透明白底 */
+            border: 1px solid transparent;
         }
         .nav-link:hover { 
             background-color: white; 
-            color: var(--accent-color); 
+            color: var(--primary-color); 
+            border-color: var(--flight-color);
             transform: translateX(5px); 
         }
         .nav-link.active { 
@@ -76,12 +80,12 @@
         main.content { flex: 1; min-width: 0; }
         section {
             background: white; border-radius: 16px; padding: 40px; margin-bottom: 40px;
-            box-shadow: 0 4px 20px rgba(132, 87, 47, 0.08); scroll-margin-top: 40px;
-            border: 1px solid rgba(132, 87, 47, 0.1);
+            box-shadow: 0 4px 20px rgba(121, 163, 206, 0.08); scroll-margin-top: 40px;
         }
         section h2 {
             margin-top: 0; font-size: 1.8rem; color: var(--primary-color);
-            border-bottom: 3px solid var(--accent-color); padding-bottom: 15px; margin-bottom: 30px;
+            border-bottom: 3px solid var(--accent-color); /* 奶油黃底線 */
+            padding-bottom: 15px; margin-bottom: 30px;
             display: flex; align-items: center; gap: 10px;
         }
 
@@ -93,11 +97,11 @@
             margin-bottom: 20px;
             display: flex;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
             transition: transform 0.2s;
             position: relative;
         }
-        .flight-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(132, 87, 47, 0.15); border-color: var(--accent-color); }
+        .flight-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(121, 163, 206, 0.15); border-color: var(--accent-color); }
         
         .flight-badge {
             position: absolute; top: 0; left: 0;
@@ -106,8 +110,8 @@
             border-bottom-right-radius: 10px;
             z-index: 2; font-weight: bold;
         }
-        .badge-intl { background: var(--flight-color); } /* 鼠尾草綠 */
-        .badge-dom { background: var(--accent-color); }  /* 金黃色 */
+        .badge-intl { background: var(--primary-color); } /* 天空藍 */
+        .badge-dom { background: var(--flight-color); }   /* 粉藍灰 */
 
         .flight-main {
             background: #fff; padding: 25px; flex: 1;
@@ -116,7 +120,7 @@
         }
         .flight-main::after, .flight-main::before {
             content: ''; position: absolute; right: -10px; width: 20px; height: 20px;
-            background-color: var(--bg-color); /* 圓圈要是背景色 */
+            background-color: var(--bg-color); /* 圓圈要是背景色(奶油白) */
             border-radius: 50%;
         }
         .flight-main::before { top: -10px; }
@@ -126,22 +130,22 @@
             font-family: 'Oswald', sans-serif; font-size: 2.2rem; color: var(--primary-color);
             font-weight: bold; line-height: 1;
         }
-        .airport-city { font-size: 0.9rem; color: #888; }
+        .airport-city { font-size: 0.9rem; color: #999; }
         .flight-route-visual {
             flex: 1; text-align: center; color: var(--flight-color); padding: 0 15px;
         }
-        .flight-duration { font-size: 0.8rem; color: #999; margin-top: 5px; display: block;}
+        .flight-duration { font-size: 0.8rem; color: #aaa; margin-top: 5px; display: block;}
 
         .flight-details-panel {
             flex: 0 0 35%; padding: 25px; background: #fafafa;
             display: flex; flex-direction: column; justify-content: center;
         }
         .flight-row { display: flex; justify-content: space-between; margin-bottom: 8px; }
-        .flight-label { font-size: 0.75rem; color: #aaa; text-transform: uppercase; letter-spacing: 1px; }
-        .flight-value { font-weight: bold; color: var(--primary-color); font-size: 0.95rem; }
+        .flight-label { font-size: 0.75rem; color: #bbb; text-transform: uppercase; letter-spacing: 1px; }
+        .flight-value { font-weight: bold; color: #555; font-size: 0.95rem; }
         .flight-number { 
-            color: var(--primary-color); 
-            background: var(--pdf-color); /* 莫蘭迪藍底 */
+            color: white; 
+            background: var(--flight-color); /* 粉藍灰底 */
             padding: 2px 8px; border-radius: 4px; font-size: 0.85rem;
         }
 
@@ -154,15 +158,15 @@
             background: #fff;
         }
         .hotel-card:hover {
-            transform: translateY(-2px); box-shadow: 0 4px 15px rgba(132, 87, 47, 0.1);
+            transform: translateY(-2px); box-shadow: 0 4px 15px rgba(121, 163, 206, 0.1);
             border-color: var(--accent-color);
         }
         .hotel-header { width: 100%; }
-        .hotel-info h3 { margin: 0 0 5px 0; font-size: 1.1rem; color: var(--primary-color); }
-        .hotel-info p { margin: 0; font-size: 0.9rem; color: #666; }
+        .hotel-info h3 { margin: 0 0 5px 0; font-size: 1.1rem; color: #444; }
+        .hotel-info p { margin: 0; font-size: 0.9rem; color: #777; }
         .hotel-day-badge {
-            background: var(--pdf-color); /* 莫蘭迪藍 */
-            color: var(--primary-color);  /* 深棕色文字 */
+            background: var(--flight-color); /* 粉藍灰 */
+            color: white; 
             padding: 4px 8px;
             border-radius: 4px; font-size: 0.8rem; font-weight: bold;
             margin-bottom: 8px; display: inline-block;
@@ -172,7 +176,7 @@
             border-top: 1px dashed #eee; padding-top: 15px;
         }
         
-        /* 按鈕樣式優化 */
+        /* 按鈕樣式 */
         .btn {
             text-decoration: none; padding: 8px 16px; border-radius: 20px;
             font-size: 0.85rem; font-weight: bold; flex: 1;
@@ -181,33 +185,33 @@
         }
         .btn:hover { opacity: 0.9; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         
-        /* 地圖按鈕：金黃色底，白色字 */
+        /* 地圖按鈕：奶油黃底，深灰字 (因為黃色較亮，配深色字較清楚) */
         .map-btn { 
             background: var(--accent-color); 
-            color: white; 
+            color: #555; 
         }
         
-        /* PDF按鈕：莫蘭迪藍底，深棕色字 (這樣配色很高級！) */
+        /* PDF按鈕：粉藍灰底，白色字 */
         .pdf-btn { 
             background: var(--pdf-color); 
-            color: var(--primary-color); 
+            color: white; 
         }
 
-        /* --- 🆕 行程樣式 (Activity List) --- */
+        /* --- 行程樣式 (Activity List) --- */
         .itinerary-card {
             background: #fff;
             border: 1px solid #eee;
             border-radius: 12px;
             padding: 25px;
             margin-bottom: 25px;
-            border-left: 5px solid var(--flight-color); /* 鼠尾草綠邊框 */
+            border-left: 5px solid var(--accent-color); /* 奶油黃邊框 */
         }
         .itinerary-header {
             display: flex; justify-content: space-between; align-items: center;
             margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px;
         }
-        .itinerary-date { font-weight: bold; color: var(--flight-color); font-size: 1.1rem; }
-        .itinerary-city { color: #888; font-size: 0.9rem; font-weight: 500; }
+        .itinerary-date { font-weight: bold; color: var(--primary-color); font-size: 1.1rem; }
+        .itinerary-city { color: #999; font-size: 0.9rem; font-weight: 500; }
         
         .activity-list {
             list-style: none; padding: 0; margin: 0;
@@ -216,7 +220,7 @@
         .activity-btn {
             text-decoration: none;
             background-color: #fafafa;
-            color: var(--primary-color);
+            color: #666;
             padding: 8px 14px;
             border-radius: 20px;
             font-size: 0.9rem;
@@ -226,18 +230,18 @@
             display: flex; align-items: center; gap: 6px;
         }
         .activity-btn:hover {
-            background-color: var(--flight-color); /* 鼠尾草綠 */
+            background-color: var(--primary-color); /* 天空藍 */
             color: white;
-            border-color: var(--flight-color);
+            border-color: var(--primary-color);
             transform: translateY(-2px);
         }
 
         /* 預約表格 */
         .info-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
         .info-table th, .info-table td { padding: 15px; border-bottom: 1px solid #eee; text-align: left; }
-        .info-table th { background-color: #fafafa; color: var(--primary-color); width: 30%; }
+        .info-table th { background-color: #fafafa; color: #666; width: 30%; }
         .status-tag { background: #fff3e0; color: #e67e22; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; }
-        .status-tag.ok { background: var(--pdf-color); color: var(--primary-color); }
+        .status-tag.ok { background: var(--flight-color); color: white; }
 
         /* RWD */
         @media (max-width: 800px) {
