@@ -8,12 +8,12 @@
     
     <style>
         :root {
-            /* --- 您的清新奶油藍配色 --- */
-            --primary-color: #306C99; /* 天空藍：標題、邊框 */
-            --accent-color: #F0DC84;  /* 奶油黃：重點按鈕、裝飾 */
-            --flight-color: #B4CCD2;  /* 粉藍灰：航班資訊 */
-            --pdf-color: #B4CCD2;     /* 粉藍灰：PDF按鈕 */
-            --bg-color: #FDF5E6;      /* 奶油白：整體背景 */
+            /* --- 您的新配色 (大地與天空) --- */
+            --primary-color: #306C99; /* 深空藍：標題、邊框 */
+            --accent-color: #8B6C5C;  /* 大地褐：重點按鈕、裝飾 */
+            --flight-color: #B2D6ED;  /* 淺水藍：航班資訊 */
+            --pdf-color: #B2D6ED;     /* 淺水藍：PDF按鈕 */
+            --bg-color: #EFE2CA;      /* 復古米：整體背景 */
             
             --text-color: #555555;    /* 深灰色：內文 */
             --sidebar-width: 260px;
@@ -30,8 +30,9 @@
 
         /* Header */
         header.hero {
-            background-color: #306C99;
-            background-image: linear-gradient(rgba(48, 108, 153, 0.4), rgba(48, 108, 153, 0.4)), url('https://images.unsplash.com/photo-1575351666624-b152e93b4a26?q=80&w=1920&auto=format&fit=crop');
+            background-color: var(--primary-color);
+            /* 調整遮罩顏色以匹配新的深空藍 */
+            background-image: linear-gradient(rgba(48, 108, 153, 0.5), rgba(48, 108, 153, 0.5)), url('https://images.unsplash.com/photo-1575351666624-b152e93b4a26?q=80&w=1920&auto=format&fit=crop');
             background-size: cover; background-position: center;
             height: 45vh;
             display: flex; justify-content: center; align-items: center;
@@ -51,7 +52,7 @@
             position: sticky; top: 40px;
             background: white; 
             padding: 30px; border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(121, 163, 206, 0.15);
+            box-shadow: 0 4px 20px rgba(48, 108, 153, 0.1); /* 藍色系陰影 */
             border: 2px solid white;
         }
         .nav-menu { list-style: none; padding: 0; margin: 0; }
@@ -79,11 +80,11 @@
         main.content { flex: 1; min-width: 0; }
         section {
             background: white; border-radius: 16px; padding: 40px; margin-bottom: 40px;
-            box-shadow: 0 4px 20px rgba(121, 163, 206, 0.08); scroll-margin-top: 40px;
+            box-shadow: 0 4px 20px rgba(48, 108, 153, 0.08); scroll-margin-top: 40px;
         }
         section h2 {
             margin-top: 0; font-size: 1.8rem; color: var(--primary-color);
-            border-bottom: 3px solid var(--accent-color);
+            border-bottom: 3px solid var(--accent-color); /* 大地褐底線 */
             padding-bottom: 15px; margin-bottom: 30px;
             display: flex; align-items: center; gap: 10px;
         }
@@ -94,7 +95,7 @@
             display: flex; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
             transition: transform 0.2s; position: relative;
         }
-        .flight-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(121, 163, 206, 0.15); border-color: var(--accent-color); }
+        .flight-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(48, 108, 153, 0.15); border-color: var(--accent-color); }
         
         .flight-badge {
             position: absolute; top: 0; left: 0;
@@ -103,7 +104,7 @@
             border-bottom-right-radius: 10px; z-index: 2; font-weight: bold;
         }
         .badge-intl { background: var(--primary-color); }
-        .badge-dom { background: var(--flight-color); }
+        .badge-dom { background: var(--flight-color); color: var(--primary-color); } /* 淺色背景配深色字 */
 
         .flight-main {
             background: #fff; padding: 25px; flex: 1;
@@ -112,7 +113,8 @@
         }
         .flight-main::after, .flight-main::before {
             content: ''; position: absolute; right: -10px; width: 20px; height: 20px;
-            background-color: var(--bg-color); border-radius: 50%;
+            background-color: var(--bg-color); /* 圓圈要是背景色 */
+            border-radius: 50%;
         }
         .flight-main::before { top: -10px; }
         .flight-main::after { bottom: -10px; }
@@ -132,7 +134,11 @@
         .flight-row { display: flex; justify-content: space-between; margin-bottom: 8px; }
         .flight-label { font-size: 0.75rem; color: #bbb; text-transform: uppercase; letter-spacing: 1px; }
         .flight-value { font-weight: bold; color: #555; font-size: 0.95rem; }
-        .flight-number { color: white; background: var(--flight-color); padding: 2px 8px; border-radius: 4px; font-size: 0.85rem; }
+        .flight-number { 
+            color: var(--primary-color); /* 字體改深色比較清楚 */
+            background: var(--flight-color); 
+            padding: 2px 8px; border-radius: 4px; font-size: 0.85rem; 
+        }
 
         /* Hotel Card */
         .hotel-grid { display: grid; gap: 20px; }
@@ -140,12 +146,12 @@
             border: 1px solid #eee; border-radius: 10px; padding: 20px;
             display: flex; flex-direction: column; gap: 15px; transition: transform 0.2s; background: #fff;
         }
-        .hotel-card:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(121, 163, 206, 0.1); border-color: var(--accent-color); }
+        .hotel-card:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(48, 108, 153, 0.1); border-color: var(--accent-color); }
         .hotel-header { width: 100%; }
-        .hotel-info h3 { margin: 0 0 5px 0; font-size: 1.1rem; color: #444; }
+        .hotel-info h3 { margin: 0 0 5px 0; font-size: 1.1rem; color: var(--primary-color); } /* 標題改為主色 */
         .hotel-info p { margin: 0; font-size: 0.9rem; color: #777; }
         .hotel-day-badge {
-            background: var(--flight-color); color: white; 
+            background: var(--flight-color); color: var(--primary-color); 
             padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold;
             margin-bottom: 8px; display: inline-block;
         }
@@ -158,10 +164,14 @@
             transition: opacity 0.2s;
         }
         .btn:hover { opacity: 0.9; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .map-btn { background: var(--accent-color); color: #555; }
-        .pdf-btn { background: var(--pdf-color); color: white; }
+        
+        /* 地圖按鈕：大地褐底，白色字 (對比度高) */
+        .map-btn { background: var(--accent-color); color: white; }
+        
+        /* PDF按鈕：淺水藍底，深空藍字 */
+        .pdf-btn { background: var(--pdf-color); color: var(--primary-color); }
 
-        /* --- 🆕 行程樣式優化 (箭頭版) --- */
+        /* --- 行程樣式 (箭頭版) --- */
         .itinerary-card {
             background: #fff; border: 1px solid #eee; border-radius: 12px;
             padding: 25px; margin-bottom: 25px; border-left: 5px solid var(--accent-color);
@@ -176,35 +186,34 @@
         .activity-list {
             list-style: none; padding: 0; margin: 0;
             display: flex; flex-wrap: wrap; align-items: center; 
-            gap: 12px; /* 增加間距讓箭頭不擁擠 */
+            gap: 12px; 
         }
         
         .activity-btn {
-            position: relative; /* 為了放箭頭 */
+            position: relative; 
             text-decoration: none;
             background-color: #fafafa;
             color: #666;
-            padding: 8px 16px; /* 稍微加寬 */
+            padding: 8px 16px; 
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 500;
             border: 1px solid #eee;
             transition: all 0.2s;
             display: flex; align-items: center; gap: 6px;
-            margin-right: 25px; /* 右邊留白給箭頭 */
+            margin-right: 25px;
         }
         
-        /* ⬇️ 這一段就是自動產生箭頭的魔法 */
+        /* 自動箭頭：使用大地褐 */
         .activity-btn::after {
-            content: "➝"; /* 箭頭符號 */
+            content: "➝"; 
             position: absolute;
-            right: -22px; /* 把箭頭推到按鈕外面 */
-            color: var(--primary-color); /* 箭頭顏色 */
+            right: -22px; 
+            color: var(--accent-color); /* 箭頭顏色 */
             font-size: 1.2rem;
             font-weight: bold;
         }
 
-        /* ⬇️ 最後一個按鈕不要有箭頭，也不需要留右邊空白 */
         .activity-btn:last-child {
             margin-right: 0;
         }
@@ -219,34 +228,12 @@
             transform: translateY(-2px);
         }
         
-        /* 手機版箭頭處理 */
-        @media (max-width: 600px) {
-            .activity-btn {
-                margin-right: 0; /* 手機版不留右邊空白 */
-                width: 100%; /* 手機版按鈕滿版比較好按 */
-                justify-content: center;
-            }
-            .activity-btn::after {
-                content: "↓"; /* 手機版改成向下箭頭 */
-                right: auto;
-                bottom: -20px; /* 放到按鈕下方 */
-                top: auto;
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            .activity-list {
-                flex-direction: column; /* 手機版垂直排列 */
-                gap: 25px; /* 增加垂直間距給箭頭 */
-                align-items: stretch;
-            }
-        }
-
         /* Info Table */
         .info-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
         .info-table th, .info-table td { padding: 15px; border-bottom: 1px solid #eee; text-align: left; }
         .info-table th { background-color: #fafafa; color: #666; width: 30%; }
         .status-tag { background: #fff3e0; color: #e67e22; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; }
-        .status-tag.ok { background: var(--flight-color); color: white; }
+        .status-tag.ok { background: var(--flight-color); color: var(--primary-color); }
 
         @media (max-width: 800px) {
             .layout-container { flex-direction: column; padding: 10px; }
@@ -257,6 +244,14 @@
             .flight-main { border-right: none; border-bottom: 2px dashed #ddd; }
             .flight-main::before, .flight-main::after { display: none; }
             .flight-details-panel { flex: auto; padding: 20px; background: #fff; }
+            
+            .activity-btn {
+                margin-right: 0; width: 100%; justify-content: center;
+            }
+            .activity-btn::after {
+                content: "↓"; right: auto; bottom: -20px; top: auto; left: 50%; transform: translateX(-50%);
+            }
+            .activity-list { flex-direction: column; gap: 25px; align-items: stretch; }
         }
     </style>
 </head>
