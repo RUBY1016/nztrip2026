@@ -15,7 +15,7 @@
             --pdf-color: #B4CCD2;     /* 粉藍灰：PDF按鈕 */
             --bg-color: #FDF5E6;      /* 奶油白：整體背景 */
             
-            --text-color: #555555;    /* 深灰色：內文 (確保閱讀清晰) */
+            --text-color: #555555;    /* 深灰色：內文 */
             --sidebar-width: 260px;
         }
         
@@ -23,15 +23,15 @@
         body {
             font-family: 'Noto Sans TC', sans-serif;
             margin: 0; padding: 0;
-            background-color: var(--bg-color); /* 奶油白背景 */
-            color: var(--text-color);          /* 深灰內文 */
+            background-color: var(--bg-color);
+            color: var(--text-color);
             line-height: 1.6;
         }
 
         /* Header */
         header.hero {
-            /* 使用天空藍的遮罩 */
             background-color: #306C99;
+            background-image: linear-gradient(rgba(48, 108, 153, 0.4), rgba(48, 108, 153, 0.4)), url('https://images.unsplash.com/photo-1575351666624-b152e93b4a26?q=80&w=1920&auto=format&fit=crop');
             background-size: cover; background-position: center;
             height: 45vh;
             display: flex; justify-content: center; align-items: center;
@@ -51,7 +51,6 @@
             position: sticky; top: 40px;
             background: white; 
             padding: 30px; border-radius: 16px;
-            /* 輕柔的藍色陰影 */
             box-shadow: 0 4px 20px rgba(121, 163, 206, 0.15);
             border: 2px solid white;
         }
@@ -84,22 +83,16 @@
         }
         section h2 {
             margin-top: 0; font-size: 1.8rem; color: var(--primary-color);
-            border-bottom: 3px solid var(--accent-color); /* 奶油黃底線 */
+            border-bottom: 3px solid var(--accent-color);
             padding-bottom: 15px; margin-bottom: 30px;
             display: flex; align-items: center; gap: 10px;
         }
 
-        /* --- ✈️ 航班卡片樣式 --- */
+        /* Flight Card */
         .flight-card {
-            border: 1px solid #eee;
-            border-radius: 12px;
-            background: white;
-            margin-bottom: 20px;
-            display: flex;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-            transition: transform 0.2s;
-            position: relative;
+            border: 1px solid #eee; border-radius: 12px; background: white; margin-bottom: 20px;
+            display: flex; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            transition: transform 0.2s; position: relative;
         }
         .flight-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(121, 163, 206, 0.15); border-color: var(--accent-color); }
         
@@ -107,11 +100,10 @@
             position: absolute; top: 0; left: 0;
             background: #95a5a6; color: white;
             font-size: 0.7rem; padding: 4px 10px;
-            border-bottom-right-radius: 10px;
-            z-index: 2; font-weight: bold;
+            border-bottom-right-radius: 10px; z-index: 2; font-weight: bold;
         }
-        .badge-intl { background: var(--primary-color); } /* 天空藍 */
-        .badge-dom { background: var(--flight-color); }   /* 粉藍灰 */
+        .badge-intl { background: var(--primary-color); }
+        .badge-dom { background: var(--flight-color); }
 
         .flight-main {
             background: #fff; padding: 25px; flex: 1;
@@ -120,8 +112,7 @@
         }
         .flight-main::after, .flight-main::before {
             content: ''; position: absolute; right: -10px; width: 20px; height: 20px;
-            background-color: var(--bg-color); /* 圓圈要是背景色(奶油白) */
-            border-radius: 50%;
+            background-color: var(--bg-color); border-radius: 50%;
         }
         .flight-main::before { top: -10px; }
         .flight-main::after { bottom: -10px; }
@@ -131,9 +122,7 @@
             font-weight: bold; line-height: 1;
         }
         .airport-city { font-size: 0.9rem; color: #999; }
-        .flight-route-visual {
-            flex: 1; text-align: center; color: var(--flight-color); padding: 0 15px;
-        }
+        .flight-route-visual { flex: 1; text-align: center; color: var(--flight-color); padding: 0 15px; }
         .flight-duration { font-size: 0.8rem; color: #aaa; margin-top: 5px; display: block;}
 
         .flight-details-panel {
@@ -143,40 +132,25 @@
         .flight-row { display: flex; justify-content: space-between; margin-bottom: 8px; }
         .flight-label { font-size: 0.75rem; color: #bbb; text-transform: uppercase; letter-spacing: 1px; }
         .flight-value { font-weight: bold; color: #555; font-size: 0.95rem; }
-        .flight-number { 
-            color: white; 
-            background: var(--flight-color); /* 粉藍灰底 */
-            padding: 2px 8px; border-radius: 4px; font-size: 0.85rem;
-        }
+        .flight-number { color: white; background: var(--flight-color); padding: 2px 8px; border-radius: 4px; font-size: 0.85rem; }
 
-
-        /* 住宿卡片 */
+        /* Hotel Card */
         .hotel-grid { display: grid; gap: 20px; }
         .hotel-card {
             border: 1px solid #eee; border-radius: 10px; padding: 20px;
-            display: flex; flex-direction: column; gap: 15px; transition: transform 0.2s;
-            background: #fff;
+            display: flex; flex-direction: column; gap: 15px; transition: transform 0.2s; background: #fff;
         }
-        .hotel-card:hover {
-            transform: translateY(-2px); box-shadow: 0 4px 15px rgba(121, 163, 206, 0.1);
-            border-color: var(--accent-color);
-        }
+        .hotel-card:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(121, 163, 206, 0.1); border-color: var(--accent-color); }
         .hotel-header { width: 100%; }
         .hotel-info h3 { margin: 0 0 5px 0; font-size: 1.1rem; color: #444; }
         .hotel-info p { margin: 0; font-size: 0.9rem; color: #777; }
         .hotel-day-badge {
-            background: var(--flight-color); /* 粉藍灰 */
-            color: white; 
-            padding: 4px 8px;
-            border-radius: 4px; font-size: 0.8rem; font-weight: bold;
+            background: var(--flight-color); color: white; 
+            padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold;
             margin-bottom: 8px; display: inline-block;
         }
-        .card-actions {
-            display: flex; gap: 10px; width: 100%;
-            border-top: 1px dashed #eee; padding-top: 15px;
-        }
+        .card-actions { display: flex; gap: 10px; width: 100%; border-top: 1px dashed #eee; padding-top: 15px; }
         
-        /* 按鈕樣式 */
         .btn {
             text-decoration: none; padding: 8px 16px; border-radius: 20px;
             font-size: 0.85rem; font-weight: bold; flex: 1;
@@ -184,27 +158,13 @@
             transition: opacity 0.2s;
         }
         .btn:hover { opacity: 0.9; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        
-        /* 地圖按鈕：奶油黃底，深灰字 (因為黃色較亮，配深色字較清楚) */
-        .map-btn { 
-            background: var(--accent-color); 
-            color: #555; 
-        }
-        
-        /* PDF按鈕：粉藍灰底，白色字 */
-        .pdf-btn { 
-            background: var(--pdf-color); 
-            color: white; 
-        }
+        .map-btn { background: var(--accent-color); color: #555; }
+        .pdf-btn { background: var(--pdf-color); color: white; }
 
-        /* --- 行程樣式 (Activity List) --- */
+        /* --- 🆕 行程樣式優化 (箭頭版) --- */
         .itinerary-card {
-            background: #fff;
-            border: 1px solid #eee;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 25px;
-            border-left: 5px solid var(--accent-color); /* 奶油黃邊框 */
+            background: #fff; border: 1px solid #eee; border-radius: 12px;
+            padding: 25px; margin-bottom: 25px; border-left: 5px solid var(--accent-color);
         }
         .itinerary-header {
             display: flex; justify-content: space-between; align-items: center;
@@ -215,35 +175,79 @@
         
         .activity-list {
             list-style: none; padding: 0; margin: 0;
-            display: flex; flex-wrap: wrap; gap: 10px;
+            display: flex; flex-wrap: wrap; align-items: center; 
+            gap: 12px; /* 增加間距讓箭頭不擁擠 */
         }
+        
         .activity-btn {
+            position: relative; /* 為了放箭頭 */
             text-decoration: none;
             background-color: #fafafa;
             color: #666;
-            padding: 8px 14px;
+            padding: 8px 16px; /* 稍微加寬 */
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 500;
             border: 1px solid #eee;
             transition: all 0.2s;
             display: flex; align-items: center; gap: 6px;
+            margin-right: 25px; /* 右邊留白給箭頭 */
         }
+        
+        /* ⬇️ 這一段就是自動產生箭頭的魔法 */
+        .activity-btn::after {
+            content: "➝"; /* 箭頭符號 */
+            position: absolute;
+            right: -22px; /* 把箭頭推到按鈕外面 */
+            color: var(--primary-color); /* 箭頭顏色 */
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* ⬇️ 最後一個按鈕不要有箭頭，也不需要留右邊空白 */
+        .activity-btn:last-child {
+            margin-right: 0;
+        }
+        .activity-btn:last-child::after {
+            content: none;
+        }
+
         .activity-btn:hover {
-            background-color: var(--primary-color); /* 天空藍 */
+            background-color: var(--primary-color);
             color: white;
             border-color: var(--primary-color);
             transform: translateY(-2px);
         }
+        
+        /* 手機版箭頭處理 */
+        @media (max-width: 600px) {
+            .activity-btn {
+                margin-right: 0; /* 手機版不留右邊空白 */
+                width: 100%; /* 手機版按鈕滿版比較好按 */
+                justify-content: center;
+            }
+            .activity-btn::after {
+                content: "↓"; /* 手機版改成向下箭頭 */
+                right: auto;
+                bottom: -20px; /* 放到按鈕下方 */
+                top: auto;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .activity-list {
+                flex-direction: column; /* 手機版垂直排列 */
+                gap: 25px; /* 增加垂直間距給箭頭 */
+                align-items: stretch;
+            }
+        }
 
-        /* 預約表格 */
+        /* Info Table */
         .info-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
         .info-table th, .info-table td { padding: 15px; border-bottom: 1px solid #eee; text-align: left; }
         .info-table th { background-color: #fafafa; color: #666; width: 30%; }
         .status-tag { background: #fff3e0; color: #e67e22; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; }
         .status-tag.ok { background: var(--flight-color); color: white; }
 
-        /* RWD */
         @media (max-width: 800px) {
             .layout-container { flex-direction: column; padding: 10px; }
             aside.sidebar { width: auto; position: relative; top: 0; padding: 15px; }
@@ -253,7 +257,6 @@
             .flight-main { border-right: none; border-bottom: 2px dashed #ddd; }
             .flight-main::before, .flight-main::after { display: none; }
             .flight-details-panel { flex: auto; padding: 20px; background: #fff; }
-            .activity-btn { width: 100%; justify-content: center; } 
         }
     </style>
 </head>
@@ -562,7 +565,7 @@
                 </div>
                 <div class="activity-list">
                     <a href="https://www.google.com/maps/search/?api=1&query=Activity+Name" target="_blank" class="activity-btn">📍 抵達基督城機場 (國內線)</a>
-                    <a href="https://maps.app.goo.gl/dQxjsP8NNvxcKjFh6" target="_blank" class="activity-btn">📍 入住 Novotel</a>
+                    <span class="activity-btn" style="cursor: default;">📍 入住 Novotel</span>
                 </div>
             </div>
 
@@ -572,8 +575,13 @@
                     <span class="itinerary-city">基督城 ➔ Lake Tekapo</span>
                 </div>
                 <div class="activity-list">
-                    <a href="https://maps.app.goo.gl/5J5CZKPD61oJPn9M9" target="_blank" class="activity-btn">📍 SIXT 取車</a> → <span class="activity-btn" style="cursor: default;">📍 超市補給 (Supermarket)</a> → <a href="https://maps.app.goo.gl/MfSWHqLuoiBtir4Y7" target="_blank" class="activity-btn">📍 基督城大教堂</a> → 
-                    <a href="https://maps.app.goo.gl/q1BXGDNyHoVJ9Kwg8" target="_blank" class="activity-btn">📍 藝術中心 (Arts Centre)</a> → <a href="https://maps.app.goo.gl/UGVqTRApeCsGXpBZA" target="_blank" class="activity-btn">📍 新攝政街 (New Regent St)</a> → <a href="https://www.google.com/maps/search/?api=1&query=5+Motuariki+Lane,+Lake+Tekapo" target="_blank" class="activity-btn">📍 特卡波湖 (Lake Tekapo)</a> → <a href="https://maps.app.goo.gl/SjvD2Cn3BAhCSyV7A" target="_blank" class="activity-btn">📍 好牧羊人教堂</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Activity+Name+New+Zealand" target="_blank" class="activity-btn">📍 SIXT 取車</a>
+                    <span class="activity-btn" style="cursor: default;">📍 超市補給 (Supermarket)</span>
+                    <a href="https://maps.google.com/?q=基督城機場諾富特酒店+30+Durey+Road8" target="_blank" class="activity-btn">📍 基督城大教堂</a>
+                    <a href="https://maps.google.com/?q=基督城機場諾富特酒店+30+Durey+Road9" target="_blank" class="activity-btn">📍 藝術中心 (Arts Centre)</a>
+                    <a href="https://maps.google.com/?q=Haka+House+Lake+Tekapo+5+Motuariki+Lane0" target="_blank" class="activity-btn">📍 新攝政街 (New Regent St)</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=5+Motuariki+Lane,+Lake+Tekapo" target="_blank" class="activity-btn">📍 特卡波湖 (Lake Tekapo)</a>
+                    <a href="https://maps.google.com/?q=Haka+House+Lake+Tekapo+5+Motuariki+Lane1" target="_blank" class="activity-btn">📍 好牧羊人教堂</a>
                 </div>
             </div>
 
@@ -584,8 +592,8 @@
                 </div>
                 <div class="activity-list">
                     <a href="https://maps.google.com/?q=Haka+House+Lake+Tekapo+5+Motuariki+Lane2" target="_blank" class="activity-btn">📍 庫克山胡克山谷步道 (Hooker Valley Track)</a>
-                    <a href="https://maps.app.goo.gl/iZc9zHTrtQpoXuLLA" target="_blank" class="activity-btn">📍 瓦納卡孤獨樹 (That Wanaka Tree)</a>
-                    <span class="activity-btn" style="cursor: default;">📍 抵達皇后鎮</a>
+                    <a href="https://maps.google.com/?q=Haka+House+Lake+Tekapo+5+Motuariki+Lane3" target="_blank" class="activity-btn">📍 瓦納卡孤獨樹 (That Wanaka Tree)</a>
+                    <span class="activity-btn" style="cursor: default;">📍 抵達皇后鎮</span>
                 </div>
             </div>
 
@@ -608,10 +616,10 @@
                 </div>
                 <div class="activity-list">
                     <a href="#" class="activity-btn">📍 06:00 出發</a>
-                    <a href="https://maps.app.goo.gl/7TyE34kUScjQXQZe6" target="_blank" class="activity-btn">📍 鏡湖 (Mirror Lakes)</a>
-                    <a href="https://maps.app.goo.gl/v7Xsn5BXDfgiNTMr9" target="_blank" class="activity-btn">📍 猴子溪 (Monkey Creek)</a>
-                    <a href="https://maps.app.goo.gl/7sg6sxHNGwrwy442A" target="_blank" class="activity-btn">📍 荷馬隧道 (Homer Tunnel)</a>
-                    <a href="https://maps.app.goo.gl/Y8AAor5HnM1xLSiw7" target="_blank" class="activity-btn">📍 米爾福德峽灣遊船</a>
+                    <a href="https://maps.google.com/?q=Haka+House+Lake+Tekapo+5+Motuariki+Lane6" target="_blank" class="activity-btn">📍 鏡湖 (Mirror Lakes)</a>
+                    <a href="https://maps.google.com/?q=Haka+House+Lake+Tekapo+5+Motuariki+Lane7" target="_blank" class="activity-btn">📍 猴子溪 (Monkey Creek)</a>
+                    <a href="https://maps.google.com/?q=Haka+House+Lake+Tekapo+5+Motuariki+Lane8" target="_blank" class="activity-btn">📍 荷馬隧道 (Homer Tunnel)</a>
+                    <a href="https://maps.google.com/?q=Haka+House+Lake+Tekapo+5+Motuariki+Lane9" target="_blank" class="activity-btn">📍 米爾福德峽灣遊船</a>
                     <a href="https://maps.app.goo.gl/dXTNbMoETZ9FPJ238" target="_blank" class="activity-btn">📍 入住 Te Anau</a>
                 </div>
             </div>
@@ -622,9 +630,9 @@
                     <span class="itinerary-city">Te Anau ➔ Dunedin ➔ Oamaru</span>
                 </div>
                 <div class="activity-list">
-                    <a href="https://maps.app.goo.gl/VRhQw9bAbXNkS3od9" target="_blank" class="activity-btn">📍 鮑德溫街 (世界最陡街道)</a>
-                    <a href="https://maps.app.goo.gl/TzS4rxn3gTk949329" target="_blank" class="activity-btn">📍 八角廣場 (The Octagon)</a>
-                    <a href="https://maps.app.goo.gl/Wcb6dQgpEm4zdgeR7" target="_blank" class="activity-btn">📍 但尼丁火車站</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=基督城機場諾富特酒店+Novotel+Christchurch+Airport0" target="_blank" class="activity-btn">📍 鮑德溫街 (世界最陡街道)</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=基督城機場諾富特酒店+Novotel+Christchurch+Airport1" target="_blank" class="activity-btn">📍 八角廣場 (The Octagon)</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=基督城機場諾富特酒店+Novotel+Christchurch+Airport2" target="_blank" class="activity-btn">📍 但尼丁火車站</a>
                     <a href="https://maps.app.goo.gl/5W8tKdi4yNFSGpVn7" target="_blank" class="activity-btn">📍 入住 Oamaru</a>
                 </div>
             </div>
@@ -635,7 +643,7 @@
                     <span class="itinerary-city">Oamaru ➔ 基督城</span>
                 </div>
                 <div class="activity-list">
-                    <a href="https://share.google/K7lQJeveMKQzohyF2" target="_blank" class="activity-btn">📍 摩拉基大圓石 (Moeraki Boulders)</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=基督城機場諾富特酒店+Novotel+Christchurch+Airport3" target="_blank" class="activity-btn">📍 摩拉基大圓石 (Moeraki Boulders)</a>
                     <a href="https://www.google.com/maps/search/?api=1&query=基督城機場諾富特酒店+Novotel+Christchurch+Airport4" target="_blank" class="activity-btn">📍 藍企鵝歸巢 (Blue Penguin Colony)</a>
                     <a href="https://maps.app.goo.gl/p56o5YQd7o5q6Tvv5" target="_blank" class="activity-btn">📍 基督城還車</a>
                 </div>
@@ -672,7 +680,7 @@
                 </div>
                 <div class="activity-list">
                     <a href="https://www.google.com/maps/search/?api=1&query=30+Durey+Road,+Christchurch+Airport" target="_blank" class="activity-btn">📍 前往奧克蘭機場 (AKL)</a>
-                    <a href="#" class="activity-btn">📍 平安返家 ✈️</a>
+                    <span class="activity-btn" style="cursor: default;">📍 平安返家 ✈️</span>
                 </div>
             </div>
             
