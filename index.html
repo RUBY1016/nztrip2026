@@ -8,17 +8,22 @@
     
     <style>
         :root {
-            /* --- 您的新配色 (大地與天空) --- */
-            --primary-color: #8B6C5C; /* 深空藍：標題、邊框 */
-            --accent-color: #8B6C5C;  /* 大地褐：重點按鈕、裝飾 */
+            /* --- 大地與天空配色 --- */
+            --primary-color: #306C99; /* 深空藍：標題、邊框 */
+            --accent-color: #8B6C5C;  /* 大地褐：重點按鈕、裝飾、Header背景 */
             --flight-color: #B2D6ED;  /* 淺水藍：航班資訊 */
             --pdf-color: #B2D6ED;     /* 淺水藍：PDF按鈕 */
-            --bg-color: #FCE3DD;      /* 復古米：整體背景 */
+            --bg-color: #FCE3DD;      /* 粉米色：整體背景 (新設定) */
             
             --text-color: #555555;    /* 深灰色：內文 */
             --sidebar-width: 260px;
         }
         
+        /* 全域設定：避免爆框的重要設定 */
+        * {
+            box-sizing: border-box;
+        }
+
         html { scroll-behavior: smooth; }
         body {
             font-family: 'Noto Sans TC', sans-serif;
@@ -28,40 +33,53 @@
             line-height: 1.6;
         }
 
-        /* Header */
+        /* Header (復古咖啡色) */
         header.hero {
-            /* 1. 如果圖片沒跑出來，底色顯示為咖啡色 */
-            background-color: #8B6C5C; 
-            
-            /* 2. 將原本的藍色遮罩改為咖啡色 (RGBA: 139, 108, 92) */
-            /* 最後的 0.6 是透明度，數字越大顏色越深 */
-            background-image: linear-gradient(rgba(139, 108, 92, 1), rgba(139, 108, 92, 0.6)), url('https://images.unsplash.com/photo-1575351666624-b152e93b4a26?q=80&w=1920&auto=format&fit=crop');
-            
-            background-size: cover; 
-            background-position: center;
+            background-color: var(--accent-color); /* 如果圖片沒載入，顯示大地褐 */
+            /* 咖啡色遮罩 */
+            background-image: linear-gradient(rgba(139, 108, 92, 0.6), rgba(139, 108, 92, 0.6)), url('https://images.unsplash.com/photo-1575351666624-b152e93b4a26?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover; background-position: center;
             height: 45vh;
-            display: flex; 
-            justify-content: center; 
-            align-items: center;
-            text-align: center; 
-            color: white; 
-            margin-bottom: 20px;
-            }
-        
+            display: flex; justify-content: center; align-items: center;
+            text-align: center; color: white; margin-bottom: 20px;
+        }
+        header.hero h1 { font-size: 3rem; margin: 0; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        header.hero p { font-size: 1.2rem; margin-top: 10px; opacity: 0.95; font-weight: 500; }
+
         /* Layout */
         .layout-container {
             display: flex; max-width: 1200px; margin: 0 auto; padding: 20px; gap: 40px;
+            position: relative;
         }
 
-        /* Sidebar */
+        /* Sidebar (電腦版) */
         aside.sidebar {
             flex: 0 0 var(--sidebar-width); height: fit-content;
             position: sticky; top: 40px;
             background: white; 
             padding: 30px; border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(48, 108, 153, 0.1); /* 藍色系陰影 */
+            box-shadow: 0 4px 20px rgba(48, 108, 153, 0.1);
             border: 2px solid white;
+            z-index: 100;
         }
+        
+        /* 手機版選單按鈕 (預設隱藏) */
+        .mobile-menu-toggle {
+            display: none; 
+            width: 100%;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
         .nav-menu { list-style: none; padding: 0; margin: 0; }
         .nav-item { margin-bottom: 15px; }
         .nav-link {
@@ -87,11 +105,11 @@
         main.content { flex: 1; min-width: 0; }
         section {
             background: white; border-radius: 16px; padding: 40px; margin-bottom: 40px;
-            box-shadow: 0 4px 20px rgba(48, 108, 153, 0.08); scroll-margin-top: 40px;
+            box-shadow: 0 4px 20px rgba(48, 108, 153, 0.08); scroll-margin-top: 80px; /* 增加捲動空間 */
         }
         section h2 {
             margin-top: 0; font-size: 1.8rem; color: var(--primary-color);
-            border-bottom: 3px solid var(--accent-color); /* 大地褐底線 */
+            border-bottom: 3px solid var(--accent-color);
             padding-bottom: 15px; margin-bottom: 30px;
             display: flex; align-items: center; gap: 10px;
         }
@@ -111,7 +129,7 @@
             border-bottom-right-radius: 10px; z-index: 2; font-weight: bold;
         }
         .badge-intl { background: var(--primary-color); }
-        .badge-dom { background: var(--flight-color); color: var(--primary-color); } /* 淺色背景配深色字 */
+        .badge-dom { background: var(--flight-color); color: var(--primary-color); }
 
         .flight-main {
             background: #fff; padding: 25px; flex: 1;
@@ -120,8 +138,7 @@
         }
         .flight-main::after, .flight-main::before {
             content: ''; position: absolute; right: -10px; width: 20px; height: 20px;
-            background-color: var(--bg-color); /* 圓圈要是背景色 */
-            border-radius: 50%;
+            background-color: var(--bg-color); border-radius: 50%;
         }
         .flight-main::before { top: -10px; }
         .flight-main::after { bottom: -10px; }
@@ -142,8 +159,7 @@
         .flight-label { font-size: 0.75rem; color: #bbb; text-transform: uppercase; letter-spacing: 1px; }
         .flight-value { font-weight: bold; color: #555; font-size: 0.95rem; }
         .flight-number { 
-            color: var(--primary-color); /* 字體改深色比較清楚 */
-            background: var(--flight-color); 
+            color: var(--primary-color); background: var(--flight-color); 
             padding: 2px 8px; border-radius: 4px; font-size: 0.85rem; 
         }
 
@@ -155,7 +171,7 @@
         }
         .hotel-card:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(48, 108, 153, 0.1); border-color: var(--accent-color); }
         .hotel-header { width: 100%; }
-        .hotel-info h3 { margin: 0 0 5px 0; font-size: 1.1rem; color: var(--primary-color); } /* 標題改為主色 */
+        .hotel-info h3 { margin: 0 0 5px 0; font-size: 1.1rem; color: var(--primary-color); }
         .hotel-info p { margin: 0; font-size: 0.9rem; color: #777; }
         .hotel-day-badge {
             background: var(--flight-color); color: var(--primary-color); 
@@ -171,14 +187,10 @@
             transition: opacity 0.2s;
         }
         .btn:hover { opacity: 0.9; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        
-        /* 地圖按鈕：大地褐底，白色字 (對比度高) */
         .map-btn { background: var(--accent-color); color: white; }
-        
-        /* PDF按鈕：淺水藍底，深空藍字 */
         .pdf-btn { background: var(--pdf-color); color: var(--primary-color); }
 
-        /* --- 行程樣式 (箭頭版) --- */
+        /* Itinerary */
         .itinerary-card {
             background: #fff; border: 1px solid #eee; border-radius: 12px;
             padding: 25px; margin-bottom: 25px; border-left: 5px solid var(--accent-color);
@@ -209,30 +221,22 @@
             transition: all 0.2s;
             display: flex; align-items: center; gap: 6px;
             margin-right: 25px;
+            
+            /* 防止文字過長爆框 */
+            max-width: 100%; 
+            white-space: normal; /* 允許換行 */
+            line-height: 1.3;
         }
         
-        /* 自動箭頭：使用大地褐 */
         .activity-btn::after {
-            content: "➝"; 
-            position: absolute;
-            right: -22px; 
-            color: var(--accent-color); /* 箭頭顏色 */
-            font-size: 1.2rem;
-            font-weight: bold;
+            content: "➝"; position: absolute; right: -22px; 
+            color: var(--accent-color); font-size: 1.2rem; font-weight: bold;
         }
-
-        .activity-btn:last-child {
-            margin-right: 0;
-        }
-        .activity-btn:last-child::after {
-            content: none;
-        }
-
+        .activity-btn:last-child { margin-right: 0; }
+        .activity-btn:last-child::after { content: none; }
         .activity-btn:hover {
-            background-color: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-            transform: translateY(-2px);
+            background-color: var(--primary-color); color: white;
+            border-color: var(--primary-color); transform: translateY(-2px);
         }
         
         /* Info Table */
@@ -242,23 +246,63 @@
         .status-tag { background: #fff3e0; color: #e67e22; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; }
         .status-tag.ok { background: var(--flight-color); color: var(--primary-color); }
 
-        @media (max-width: 800px) {
-            .layout-container { flex-direction: column; padding: 10px; }
-            aside.sidebar { width: auto; position: relative; top: 0; padding: 15px; }
-            .nav-menu { display: flex; gap: 10px; overflow-x: auto; white-space: nowrap; }
+        /* --- 📱 手機版專屬設定 --- */
+        @media (max-width: 850px) {
+            .layout-container { 
+                flex-direction: column; 
+                padding: 15px; 
+                gap: 20px;
+            }
+            
+            /* 側邊欄變身 */
+            aside.sidebar { 
+                width: 100%; 
+                position: relative; /* 手機版不固定在左邊 */
+                top: 0; 
+                padding: 10px;
+                background: transparent; /* 背景透明 */
+                box-shadow: none;
+                border: none;
+                z-index: 999;
+            }
+
+            /* 顯示漢堡選單按鈕 */
+            .mobile-menu-toggle { display: block; }
+
+            /* 預設隱藏選單內容，透過 JS 打開 */
+            .nav-menu { 
+                display: none; 
+                background: white;
+                padding: 20px;
+                border-radius: 12px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+                margin-top: 5px;
+            }
+            .nav-menu.show { display: block; animation: slideDown 0.3s ease; }
+
+            @keyframes slideDown {
+                from { opacity: 0; transform: translateY(-10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+
+            /* 內容卡片調整 */
+            section { padding: 25px 20px; }
+            
             .card-actions { flex-direction: column; }
             .flight-card { flex-direction: column; }
             .flight-main { border-right: none; border-bottom: 2px dashed #ddd; }
             .flight-main::before, .flight-main::after { display: none; }
             .flight-details-panel { flex: auto; padding: 20px; background: #fff; }
             
+            /* 行程按鈕調整 */
             .activity-btn {
                 margin-right: 0; width: 100%; justify-content: center;
+                text-align: center;
             }
             .activity-btn::after {
-                content: "↓"; right: auto; bottom: -20px; top: auto; left: 50%; transform: translateX(-50%);
+                content: "↓"; right: auto; bottom: -22px; top: auto; left: 50%; transform: translateX(-50%);
             }
-            .activity-list { flex-direction: column; gap: 25px; align-items: stretch; }
+            .activity-list { flex-direction: column; gap: 28px; align-items: stretch; }
         }
     </style>
 </head>
@@ -274,11 +318,15 @@
 <div class="layout-container">
     
     <aside class="sidebar">
-        <ul class="nav-menu">
-            <li class="nav-item"><a href="#flights" class="nav-link"><span>✈️</span> 航班資訊</a></li>
-            <li class="nav-item"><a href="#accommodation" class="nav-link"><span>🏨</span> 住宿安排</a></li>
-            <li class="nav-item"><a href="#itinerary" class="nav-link"><span>🗓️</span> 每日行程</a></li>
-            <li class="nav-item"><a href="#reservations" class="nav-link"><span>🎫</span> 預約資訊</a></li>
+        <button class="mobile-menu-toggle" onclick="toggleMenu()">
+            ☰ 導覽選單
+        </button>
+
+        <ul class="nav-menu" id="navMenu">
+            <li class="nav-item"><a href="#flights" class="nav-link" onclick="toggleMenu()"><span>✈️</span> 航班資訊</a></li>
+            <li class="nav-item"><a href="#accommodation" class="nav-link" onclick="toggleMenu()"><span>🏨</span> 住宿安排</a></li>
+            <li class="nav-item"><a href="#itinerary" class="nav-link" onclick="toggleMenu()"><span>🗓️</span> 每日行程</a></li>
+            <li class="nav-item"><a href="#reservations" class="nav-link" onclick="toggleMenu()"><span>🎫</span> 預約資訊</a></li>
         </ul>
     </aside>
 
@@ -450,13 +498,11 @@
                     </div>
                 </div>
             </div>
-
         </section>
 
         <section id="accommodation">
             <h2>🏨 住宿安排</h2>
             <div class="hotel-grid">
-                
                 <div class="hotel-card">
                     <div class="hotel-header">
                         <span class="hotel-day-badge">Day 1 (02/15)</span>
@@ -470,7 +516,6 @@
                         <a href="nz_0215.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
                     </div>
                 </div>
-
                 <div class="hotel-card">
                     <div class="hotel-header">
                         <span class="hotel-day-badge">Day 2 (02/16)</span>
@@ -484,7 +529,6 @@
                         <a href="nz_0216.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
                     </div>
                 </div>
-
                 <div class="hotel-card">
                     <div class="hotel-header">
                         <span class="hotel-day-badge">Day 3-4 (02/17-18)</span>
@@ -498,7 +542,6 @@
                         <a href="nz_0217.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
                     </div>
                 </div>
-
                 <div class="hotel-card">
                     <div class="hotel-header">
                         <span class="hotel-day-badge">Day 5 (02/19)</span>
@@ -512,7 +555,6 @@
                         <a href="nz_0219.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
                     </div>
                 </div>
-
                 <div class="hotel-card">
                     <div class="hotel-header">
                         <span class="hotel-day-badge">Day 6 (02/20)</span>
@@ -526,7 +568,6 @@
                         <a href="nz_0220.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
                     </div>
                 </div>
-                
                 <div class="hotel-card">
                     <div class="hotel-header">
                         <span class="hotel-day-badge">Day 7 (02/21)</span>
@@ -540,7 +581,6 @@
                         <a href="nz_0221.pdf" target="_blank" class="btn pdf-btn">📄 住宿確認單</a>
                     </div>
                 </div>
-
                 <div class="hotel-card">
                     <div class="hotel-header">
                         <span class="hotel-day-badge">Day 8-9 (02/22-23)</span>
@@ -685,7 +725,6 @@
                     <span class="activity-btn" style="cursor: default;">📍 平安返家 ✈️</span>
                 </div>
             </div>
-            
         </section>
 
         <section id="reservations">
@@ -701,6 +740,17 @@
 
     </main>
 </div>
+
+<script>
+    function toggleMenu() {
+        var menu = document.getElementById("navMenu");
+        if (menu.classList.contains("show")) {
+            menu.classList.remove("show");
+        } else {
+            menu.classList.add("show");
+        }
+    }
+</script>
 
 </body>
 </html>
