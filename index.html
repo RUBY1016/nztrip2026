@@ -10,12 +10,12 @@
         :root {
             /* --- 大地與天空配色 --- */
             --primary-color: #306C99; /* 深空藍：標題、邊框 */
-            --accent-color: #381A11;  /* 大地褐：Header實心背景、重點按鈕 */
+            --accent-color: #4D332C;  /* 大地褐：Header實心背景、重點按鈕 */
             --flight-color: #B2D6ED;  /* 淺水藍：航班資訊 */
             --pdf-color: #B2D6ED;     /* 淺水藍：PDF按鈕 */
             
-            /* 👇 這裡改了：變成非常淺、帶透明感的粉米色 (原本是 #FCE3DD) */
-            --bg-color: rgba(252, 227, 221, 0.3); 
+            /* 背景色：帶有透明度的粉米色 (RGB: 252, 227, 221) */
+            --bg-color: rgba(252, 227, 221, 0.4); 
             
             --text-color: #555555;    /* 深灰色：內文 */
             --sidebar-width: 260px;
@@ -27,20 +27,21 @@
         body {
             font-family: 'Noto Sans TC', sans-serif;
             margin: 0; padding: 0;
-            background-color: var(--bg-color); /* 套用變淺的背景 */
+            background-color: var(--bg-color); /* 網頁背景 (半透明粉) */
             color: var(--text-color);
             line-height: 1.6;
+            overflow-x: hidden; /* 防止側邊欄滑出時出現橫向卷軸 */
         }
 
-        /* Header (純色飽和色塊) */
+        /* Header (維持飽和實心色) */
         header.hero {
-            /* 👇 這裡改了：只保留純色，拿掉背景圖片和漸層 */
-            background-color: var(--accent-color); 
-            
-            height: 40vh; /* 稍微縮小一點高度，讓實心色塊不會太壓迫 */
+            background-color: var(--accent-color); /* #8B6C5C */
+            height: 40vh;
             display: flex; justify-content: center; align-items: center;
             text-align: center; color: white; margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(139, 108, 92, 0.2); /* 微微的陰影增加層次 */
+            box-shadow: 0 4px 10px rgba(139, 108, 92, 0.3);
+            position: relative;
+            z-index: 1;
         }
         header.hero h1 { font-size: 3rem; margin: 0; text-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         header.hero p { font-size: 1.2rem; margin-top: 10px; opacity: 0.9; font-weight: 500; }
@@ -51,7 +52,7 @@
             position: relative;
         }
 
-        /* Sidebar */
+        /* --- 側邊欄 (Sidebar) --- */
         aside.sidebar {
             flex: 0 0 var(--sidebar-width); height: fit-content;
             position: sticky; top: 40px;
@@ -59,26 +60,11 @@
             padding: 30px; border-radius: 16px;
             box-shadow: 0 4px 20px rgba(48, 108, 153, 0.1);
             border: 2px solid white;
-            z-index: 100;
-        }
-        
-        /* 手機版選單按鈕 */
-        .mobile-menu-toggle {
-            display: none; 
-            width: 100%;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 15px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border-radius: 12px;
-            cursor: pointer;
-            margin-bottom: 10px;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: transform 0.3s ease-in-out; /* 滑動動畫 */
         }
 
+        /* 選單內容 */
         .nav-menu { list-style: none; padding: 0; margin: 0; }
         .nav-item { margin-bottom: 15px; }
         .nav-link {
@@ -90,7 +76,7 @@
             border: 1px solid transparent;
         }
         .nav-link:hover { 
-            background-color: white; 
+            background-color: #f0f7fb; 
             color: var(--primary-color); 
             border-color: var(--flight-color);
             transform: translateX(5px); 
@@ -99,6 +85,38 @@
             background-color: var(--primary-color); 
             color: white; 
         }
+
+        /* 手機版漢堡按鈕 (預設隱藏，手機版才顯示) */
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 2000; /* 最上層 */
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 遮罩 (手機版打開選單時的背景變暗) */
+        .menu-overlay {
+            display: none;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .menu-overlay.active { display: block; opacity: 1; }
+
 
         /* Main Content */
         main.content { flex: 1; min-width: 0; }
@@ -137,9 +155,7 @@
         }
         .flight-main::after, .flight-main::before {
             content: ''; position: absolute; right: -10px; width: 20px; height: 20px;
-            background-color: #fff; /* 圓圈改為白色，因為現在背景比較淡，用白色比較乾淨 */
-            border-radius: 50%;
-            border: 1px solid #eee; /* 加上一點邊框讓圓圈清楚 */
+            background-color: #fff; border-radius: 50%; border: 1px solid #eee;
         }
         .flight-main::before { top: -10px; }
         .flight-main::after { bottom: -10px; }
@@ -247,28 +263,34 @@
         .status-tag { background: #fff3e0; color: #e67e22; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; }
         .status-tag.ok { background: var(--flight-color); color: var(--primary-color); }
 
-        /* --- 手機版專屬設定 --- */
+        /* --- 📱 手機版專屬設定 (側邊滑出選單) --- */
         @media (max-width: 850px) {
             .layout-container { flex-direction: column; padding: 15px; gap: 20px; }
             
-            /* 側邊欄變身 */
+            /* 1. 漢堡按鈕顯示 */
+            .mobile-menu-toggle { display: flex; }
+
+            /* 2. 側邊欄變身為「抽屜」 */
             aside.sidebar { 
-                width: 100%; position: relative; top: 0; padding: 10px;
-                background: transparent; box-shadow: none; border: none; z-index: 999;
+                position: fixed; 
+                top: 0; 
+                left: -300px; /* 預設藏在左邊外面 */
+                width: 280px; 
+                height: 100vh;
+                margin: 0;
+                border-radius: 0;
+                box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+                overflow-y: auto; /* 內容太長可捲動 */
+                padding-top: 60px; /* 避開頂部 */
+            }
+            
+            /* 當加上 .active 類別時，滑出來 */
+            aside.sidebar.active {
+                left: 0;
             }
 
-            .mobile-menu-toggle { display: block; }
-
-            .nav-menu { 
-                display: none; background: white; padding: 20px;
-                border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); margin-top: 5px;
-            }
-            .nav-menu.show { display: block; animation: slideDown 0.3s ease; }
-
-            @keyframes slideDown {
-                from { opacity: 0; transform: translateY(-10px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
+            /* 選單項目 */
+            .nav-menu { display: block; } /* 確保顯示 */
 
             section { padding: 25px 20px; }
             .card-actions { flex-direction: column; }
@@ -290,6 +312,10 @@
 </head>
 <body>
 
+<button class="mobile-menu-toggle" onclick="toggleSidebar()">☰</button>
+
+<div class="menu-overlay" onclick="toggleSidebar()"></div>
+
 <header class="hero">
     <div>
         <h1>紐西蘭 2026</h1>
@@ -299,16 +325,15 @@
 
 <div class="layout-container">
     
-    <aside class="sidebar">
-        <button class="mobile-menu-toggle" onclick="toggleMenu()">
-            ☰ 導覽選單
-        </button>
-
-        <ul class="nav-menu" id="navMenu">
-            <li class="nav-item"><a href="#flights" class="nav-link" onclick="toggleMenu()"><span>✈️</span> 航班資訊</a></li>
-            <li class="nav-item"><a href="#accommodation" class="nav-link" onclick="toggleMenu()"><span>🏨</span> 住宿安排</a></li>
-            <li class="nav-item"><a href="#itinerary" class="nav-link" onclick="toggleMenu()"><span>🗓️</span> 每日行程</a></li>
-            <li class="nav-item"><a href="#reservations" class="nav-link" onclick="toggleMenu()"><span>🎫</span> 預約資訊</a></li>
+    <aside class="sidebar" id="sidebar">
+        <h3 style="margin-top:0; color:var(--primary-color); border-bottom: 2px solid var(--accent-color); padding-bottom:10px;">
+            旅程導覽
+        </h3>
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="#flights" class="nav-link" onclick="toggleSidebar()"><span>✈️</span> 航班資訊</a></li>
+            <li class="nav-item"><a href="#accommodation" class="nav-link" onclick="toggleSidebar()"><span>🏨</span> 住宿安排</a></li>
+            <li class="nav-item"><a href="#itinerary" class="nav-link" onclick="toggleSidebar()"><span>🗓️</span> 每日行程</a></li>
+            <li class="nav-item"><a href="#reservations" class="nav-link" onclick="toggleSidebar()"><span>🎫</span> 預約資訊</a></li>
         </ul>
     </aside>
 
@@ -724,12 +749,17 @@
 </div>
 
 <script>
-    function toggleMenu() {
-        var menu = document.getElementById("navMenu");
-        if (menu.classList.contains("show")) {
-            menu.classList.remove("show");
+    function toggleSidebar() {
+        var sidebar = document.getElementById("sidebar");
+        var overlay = document.querySelector(".menu-overlay");
+        
+        // 切換 active 類別
+        if (sidebar.classList.contains("active")) {
+            sidebar.classList.remove("active");
+            overlay.classList.remove("active");
         } else {
-            menu.classList.add("show");
+            sidebar.classList.add("active");
+            overlay.classList.add("active");
         }
     }
 </script>
