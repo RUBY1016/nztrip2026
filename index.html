@@ -10,41 +10,40 @@
         :root {
             /* --- 大地與天空配色 --- */
             --primary-color: #306C99; /* 深空藍：標題、邊框 */
-            --accent-color: #8B6C5C;  /* 大地褐：重點按鈕、裝飾、Header背景 */
+            --accent-color: #8B6C5C;  /* 大地褐：Header實心背景、重點按鈕 */
             --flight-color: #B2D6ED;  /* 淺水藍：航班資訊 */
             --pdf-color: #B2D6ED;     /* 淺水藍：PDF按鈕 */
-            --bg-color: #FCE3DD;      /* 粉米色：整體背景 (新設定) */
+            
+            /* 👇 這裡改了：變成非常淺、帶透明感的粉米色 (原本是 #FCE3DD) */
+            --bg-color: rgba(252, 227, 221, 0.3); 
             
             --text-color: #555555;    /* 深灰色：內文 */
             --sidebar-width: 260px;
         }
         
-        /* 全域設定：避免爆框的重要設定 */
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
         html { scroll-behavior: smooth; }
         body {
             font-family: 'Noto Sans TC', sans-serif;
             margin: 0; padding: 0;
-            background-color: var(--bg-color);
+            background-color: var(--bg-color); /* 套用變淺的背景 */
             color: var(--text-color);
             line-height: 1.6;
         }
 
-        /* Header (復古咖啡色) */
+        /* Header (純色飽和色塊) */
         header.hero {
-            background-color: var(--accent-color); /* 如果圖片沒載入，顯示大地褐 */
-            /* 咖啡色遮罩 */
-            background-image: linear-gradient(rgba(139, 108, 92, 0.6), rgba(139, 108, 92, 0.6)), url('https://images.unsplash.com/photo-1575351666624-b152e93b4a26?q=80&w=1920&auto=format&fit=crop');
-            background-size: cover; background-position: center;
-            height: 45vh;
+            /* 👇 這裡改了：只保留純色，拿掉背景圖片和漸層 */
+            background-color: var(--accent-color); 
+            
+            height: 40vh; /* 稍微縮小一點高度，讓實心色塊不會太壓迫 */
             display: flex; justify-content: center; align-items: center;
             text-align: center; color: white; margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(139, 108, 92, 0.2); /* 微微的陰影增加層次 */
         }
-        header.hero h1 { font-size: 3rem; margin: 0; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
-        header.hero p { font-size: 1.2rem; margin-top: 10px; opacity: 0.95; font-weight: 500; }
+        header.hero h1 { font-size: 3rem; margin: 0; text-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        header.hero p { font-size: 1.2rem; margin-top: 10px; opacity: 0.9; font-weight: 500; }
 
         /* Layout */
         .layout-container {
@@ -52,7 +51,7 @@
             position: relative;
         }
 
-        /* Sidebar (電腦版) */
+        /* Sidebar */
         aside.sidebar {
             flex: 0 0 var(--sidebar-width); height: fit-content;
             position: sticky; top: 40px;
@@ -63,7 +62,7 @@
             z-index: 100;
         }
         
-        /* 手機版選單按鈕 (預設隱藏) */
+        /* 手機版選單按鈕 */
         .mobile-menu-toggle {
             display: none; 
             width: 100%;
@@ -105,7 +104,7 @@
         main.content { flex: 1; min-width: 0; }
         section {
             background: white; border-radius: 16px; padding: 40px; margin-bottom: 40px;
-            box-shadow: 0 4px 20px rgba(48, 108, 153, 0.08); scroll-margin-top: 80px; /* 增加捲動空間 */
+            box-shadow: 0 4px 20px rgba(48, 108, 153, 0.08); scroll-margin-top: 80px;
         }
         section h2 {
             margin-top: 0; font-size: 1.8rem; color: var(--primary-color);
@@ -138,7 +137,9 @@
         }
         .flight-main::after, .flight-main::before {
             content: ''; position: absolute; right: -10px; width: 20px; height: 20px;
-            background-color: var(--bg-color); border-radius: 50%;
+            background-color: #fff; /* 圓圈改為白色，因為現在背景比較淡，用白色比較乾淨 */
+            border-radius: 50%;
+            border: 1px solid #eee; /* 加上一點邊框讓圓圈清楚 */
         }
         .flight-main::before { top: -10px; }
         .flight-main::after { bottom: -10px; }
@@ -222,9 +223,9 @@
             display: flex; align-items: center; gap: 6px;
             margin-right: 25px;
             
-            /* 防止文字過長爆框 */
+            /* 手機版防爆框 */
             max-width: 100%; 
-            white-space: normal; /* 允許換行 */
+            white-space: normal; 
             line-height: 1.3;
         }
         
@@ -246,37 +247,21 @@
         .status-tag { background: #fff3e0; color: #e67e22; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; }
         .status-tag.ok { background: var(--flight-color); color: var(--primary-color); }
 
-        /* --- 📱 手機版專屬設定 --- */
+        /* --- 手機版專屬設定 --- */
         @media (max-width: 850px) {
-            .layout-container { 
-                flex-direction: column; 
-                padding: 15px; 
-                gap: 20px;
-            }
+            .layout-container { flex-direction: column; padding: 15px; gap: 20px; }
             
             /* 側邊欄變身 */
             aside.sidebar { 
-                width: 100%; 
-                position: relative; /* 手機版不固定在左邊 */
-                top: 0; 
-                padding: 10px;
-                background: transparent; /* 背景透明 */
-                box-shadow: none;
-                border: none;
-                z-index: 999;
+                width: 100%; position: relative; top: 0; padding: 10px;
+                background: transparent; box-shadow: none; border: none; z-index: 999;
             }
 
-            /* 顯示漢堡選單按鈕 */
             .mobile-menu-toggle { display: block; }
 
-            /* 預設隱藏選單內容，透過 JS 打開 */
             .nav-menu { 
-                display: none; 
-                background: white;
-                padding: 20px;
-                border-radius: 12px;
-                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-                margin-top: 5px;
+                display: none; background: white; padding: 20px;
+                border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); margin-top: 5px;
             }
             .nav-menu.show { display: block; animation: slideDown 0.3s ease; }
 
@@ -285,19 +270,16 @@
                 to { opacity: 1; transform: translateY(0); }
             }
 
-            /* 內容卡片調整 */
             section { padding: 25px 20px; }
-            
             .card-actions { flex-direction: column; }
             .flight-card { flex-direction: column; }
             .flight-main { border-right: none; border-bottom: 2px dashed #ddd; }
             .flight-main::before, .flight-main::after { display: none; }
             .flight-details-panel { flex: auto; padding: 20px; background: #fff; }
             
-            /* 行程按鈕調整 */
+            /* 行程按鈕手機版 */
             .activity-btn {
-                margin-right: 0; width: 100%; justify-content: center;
-                text-align: center;
+                margin-right: 0; width: 100%; justify-content: center; text-align: center;
             }
             .activity-btn::after {
                 content: "↓"; right: auto; bottom: -22px; top: auto; left: 50%; transform: translateX(-50%);
