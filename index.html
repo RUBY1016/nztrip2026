@@ -30,17 +30,23 @@
 
         /* Header */
         header.hero {
-            background-color: var(--primary-color);
-            /* 調整遮罩顏色以匹配新的深空藍 */
-            background-image: linear-gradient(rgba(48, 108, 153, 0.5), rgba(48, 108, 153, 0.5)), url('https://images.unsplash.com/photo-1575351666624-b152e93b4a26?q=80&w=1920&auto=format&fit=crop');
-            background-size: cover; background-position: center;
+            /* 1. 如果圖片沒跑出來，底色顯示為咖啡色 */
+            background-color: #8B6C5C; 
+            
+            /* 2. 將原本的藍色遮罩改為咖啡色 (RGBA: 139, 108, 92) */
+            /* 最後的 0.6 是透明度，數字越大顏色越深 */
+            background-image: linear-gradient(rgba(139, 108, 92, 0.6), rgba(139, 108, 92, 0.6)), url('https://images.unsplash.com/photo-1575351666624-b152e93b4a26?q=80&w=1920&auto=format&fit=crop');
+            
+            background-size: cover; 
+            background-position: center;
             height: 45vh;
-            display: flex; justify-content: center; align-items: center;
-            text-align: center; color: white; margin-bottom: 20px;
-        }
-        header.hero h1 { font-size: 3rem; margin: 0; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
-        header.hero p { font-size: 1.2rem; margin-top: 10px; opacity: 0.95; font-weight: 500; }
-
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            text-align: center; 
+            color: white; 
+            margin-bottom: 20px;
+            
         /* Layout */
         .layout-container {
             display: flex; max-width: 1200px; margin: 0 auto; padding: 20px; gap: 40px;
