@@ -91,7 +91,7 @@
             display: none;
             position: fixed;
             top: 20px;
-            right: -20px;
+            right: 300px;
             background: var(--flight-color);
             color: white;
             border: none;
@@ -131,7 +131,7 @@
             display: flex; align-items: center; gap: 10px;
         }
 
-        /* Flight Card */
+       /* Flight Card */
         .flight-card {
             border: 1px solid #eee; border-radius: 12px; background: white; margin-bottom: 20px;
             display: flex; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
@@ -159,6 +159,11 @@
         }
         .flight-main::before { top: -10px; }
         .flight-main::after { bottom: -10px; }
+
+        /* 👇 這就是調整文字位置的關鍵 👇 */
+        .airport-info {
+            padding-top: 20px; /* 增加上方的距離，讓文字往下移 */
+        }
 
         .airport-code {
             font-family: 'Oswald', sans-serif; font-size: 2.2rem; color: var(--primary-color);
